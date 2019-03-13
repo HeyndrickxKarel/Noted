@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faEdit, faBold, faItalic, faCode, faParagraph, faListUl, faListOl, faExpand } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faEdit, faBold, faItalic, faCode, faParagraph, faListUl, faListOl, faExpand, faStrikethrough, faUnderline, faQuoteRight, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import moment from 'moment'
 
-library.add(faSearch,faEdit, faBold, faItalic, faCode, faParagraph, faListUl, faListOl, faExpand)
+library.add(faSearch,faEdit, faBold, faItalic, faCode, faParagraph, faListUl, faListOl, faExpand, faStrikethrough, faUnderline, faQuoteRight, faMinus)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

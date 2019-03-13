@@ -10,6 +10,24 @@
         >
           <button
             class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+            @click="commands.heading({ level: 1 })"
+          >H1</button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+            @click="commands.heading({ level: 2 })"
+          >H2</button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+            @click="commands.heading({ level: 3 })"
+          >H3</button>
+          
+          <button
+            class="menubar__button"
             :class="{ 'is-active': isActive.bold() }"
             @click="commands.bold"
           >
@@ -26,6 +44,58 @@
           
           <button
             class="menubar__button"
+            :class="{ 'is-active': isActive.strike() }"
+            @click="commands.strike"
+          >
+            <font-awesome-icon icon="strikethrough"/>
+          </button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.underline() }"
+            @click="commands.underline"
+          >
+            <font-awesome-icon icon="underline"/>
+          </button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.paragraph() }"
+            @click="commands.paragraph"
+          >
+            <font-awesome-icon icon="paragraph"/>
+          </button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bullet_list() }"
+            @click="commands.bullet_list"
+          >
+            <font-awesome-icon icon="list-ul"/>
+          </button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.ordered_list() }"
+            @click="commands.ordered_list"
+          >
+            <font-awesome-icon icon="list-ol"/>
+          </button>
+          
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.blockquote() }"
+            @click="commands.blockquote"
+          >
+            <font-awesome-icon icon="quote-right"/>
+          </button>
+          
+          <button class="menubar__button" @click="commands.horizontal_rule">
+            <font-awesome-icon icon="minus"/>
+          </button>
+          
+          <button
+            class="menubar__button"
             :class="{ 'is-active': isActive.code() }"
             @click="commands.code"
           >
@@ -34,52 +104,13 @@
           
           <button
             class="menubar__button"
-            :class="{ 'is-active': isActive.paragraph() }"
-            @click="commands.paragraph"
-          >            <font-awesome-icon icon="paragraph"/>
-</button>
-          
-          <button
-            class="menubar__button"
-            :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-            @click="commands.heading({ level: 1 })"
-          ><strong>H1</strong></button>
-          
-          <button
-            class="menubar__button"
-            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-            @click="commands.heading({ level: 2 })"
-          ><strong>H2</strong></button>
-          
-          <button
-            class="menubar__button"
-            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-            @click="commands.heading({ level: 3 })"
-          ><strong>H3</strong></button>
-          
-          <button
-            class="menubar__button"
-            :class="{ 'is-active': isActive.bullet_list() }"
-            @click="commands.bullet_list"
-          >            <font-awesome-icon icon="list-ul"/>
-          </button>
-          
-          <button
-            class="menubar__button"
-            :class="{ 'is-active': isActive.ordered_list() }"
-            @click="commands.ordered_list"
-          >            <font-awesome-icon icon="list-ol"/>
-          </button>
-          
-          <button
-            class="menubar__button"
             :class="{ 'is-active': isActive.code_block() }"
             @click="commands.code_block"
-          >            <font-awesome-icon icon="expand"/>
+          >
+            <font-awesome-icon icon="expand"/>
           </button>
         </div>
       </editor-menu-bar>
-
       <editor-content class="editor__content editor" :editor="editor"/>
     </div>
   </div>
@@ -92,6 +123,7 @@ import {
   Blockquote,
   CodeBlock,
   HardBreak,
+  HorizontalRule,
   Heading,
   OrderedList,
   BulletList,
@@ -102,6 +134,8 @@ import {
   Code,
   Italic,
   Link,
+  Strike,
+  Underline,
   History
 } from "tiptap-extensions";
 
@@ -123,19 +157,17 @@ export default {
           new OrderedList(),
           new TodoItem(),
           new TodoList(),
+          new HorizontalRule(),
           new Bold(),
           new Code(),
           new Italic(),
           new Link(),
+          new Strike(),
+          new Underline(),
           new History()
         ],
         content: `
-          <h2>
-            Export HTML or JSON
-          </h2>
-          <p>
-            You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.
-          </p>
+          <h2>This is my <strong>first</strong> note</h2><hr><p></p><p>I am able to export my data as <s>javascript </s><code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.</p><p></p><h3>What can i do?</h3><p></p><p>All kinds of <strong>cool</strong> stuff like typing a coding block </p><pre><code>alert("You're awesome")</code></pre><p></p><p>or maybe make a list like so</p><p></p><ul><li><p>This</p></li><li><p>is </p></li><li><p>Amazing</p></li></ul><h3></h3><blockquote><h1>What can i do</h1></blockquote><p></p>
         `,
         onUpdate: ({ getJSON, getHTML }) => {
           this.json = getJSON();
@@ -211,12 +243,13 @@ export default {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
-  color: #959595;
+  font-size: 14px;
+  color: #959595 !important;
+  font-weight: bold;
   transition: 0.4s;
   margin: 10px 10px 0px 10px;
 }
 .menubar__button:hover {
-  color: #de4b50;
+  color: #de4b50 !important;
 }
 </style>

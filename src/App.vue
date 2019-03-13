@@ -62,5 +62,14 @@ code{
 pre code{
   color: #4a4a4a !important;
 }
-
+blockquote {
+  border-left: 3px solid #de4b50;
+    color: rgba(0,0,0,.8);
+    padding-left: .8rem !important;
+    font-style: italic;
+}
+hr{
+  background-color: #d4d4d4 !important;
+    height: 1px !important;
+}
 </style>
