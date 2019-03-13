@@ -1,0 +1,30 @@
+$primary: #de4b50;
+$lightGray : rgb(175, 175, 175);
+$menu-item-active-background-color: $primary;
+$menu-item-color:$lightGray;
+$menu-item-hover-background-color: #232629;
+$menu-item-hover-color: $lightGray;
+
+@import "~bulma/bulma";
+
+.dark-icon {
+    color: $lightGray;
+    cursor: pointer;
+    transition: 0.4s;
+    
+}
+.dark-icon:hover{
+    color: $primary
+}
+.large-icon{
+    font-size: 20px;
+}
+.column{
+    padding: 0 !important;
+    .columns {
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+      }
+  }
+  
