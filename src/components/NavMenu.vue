@@ -17,6 +17,9 @@
         <li>
           <router-link to="/about" v-on:click.native="setActive('about')" :class="{ 'is-active': isActive('about') }">Info</router-link>
         </li>
+         <li>
+          <router-link to="/login" v-on:click.native="setActive('login')" :class="{ 'is-active': isActive('login') }">Inloggen</router-link>
+        </li>
       </ul>
     </aside>
   </div>
