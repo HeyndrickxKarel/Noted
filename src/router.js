@@ -24,6 +24,12 @@ export default new Router({
       path:'/login',
       name:'login',
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
+    },
+    {
+      path: '/deleted',
+      name:'deleted',
+      component: () => import(/* webpackChunkName: "deleted" */ './views/Deleted.vue')
+
     }
     
   ]

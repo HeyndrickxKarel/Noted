@@ -21,6 +21,9 @@ export default {
   components: {    
     NoteList,
     Editor
+  },
+    mounted(){
+    this.$store.commit("setActivePage", "home");
   }
 };
 </script>
@@ -31,8 +34,6 @@ export default {
 .columns {
   margin-top: 0px !important;
 }
-.home{
-  background-color: #fafafa;
-}
+
 </style>
 

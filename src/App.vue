@@ -4,9 +4,12 @@
       <div class="column is-narrow">
         <NavMenu/>
       </div>
-      <div class="column">
+      <div class="column backgroundcolor">
         <router-view/>
       </div>
+    </div>
+    <div class="statusbarContainer">
+    <Statusbar />
     </div>
   </div>
 </template>
@@ -15,18 +18,22 @@
 <script>
 // @ is an alias to /src
 import NavMenu from "@/components/NavMenu.vue";
+import Statusbar from "@/components/Statusbar.vue";
 
 export default {
   name: "app",
   components: {
-    NavMenu
+    NavMenu, Statusbar
   }
   
 };
 </script>
 
 
-<style lang="scss">
+<style>
+
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css";
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -67,5 +74,15 @@ blockquote {
 hr {
   background-color: #d4d4d4 !important;
   height: 1px !important;
+}
+.backgroundcolor{
+  background-color: #fafafa;
+
+}
+.statusbarContainer{
+    position: absolute;
+    width: 80%;
+    bottom: 10px;
+    left: 10%;
 }
 </style>

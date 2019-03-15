@@ -4,10 +4,10 @@
       <p class="menu-label">Algemeen</p>
       <ul class="menu-list">
         <li>
-          <router-link to="/" v-on:click.native="setActive('notes')" :class="{ 'is-active': isActive('notes') }">Mijn notities</router-link>
+          <router-link to="/" :class="{ 'is-active': isActive('home') }">Mijn notities</router-link>
         </li>
         <li>
-          <router-link to="/deleted" v-on:click.native="setActive('deleted')" :class="{ 'is-active': isActive('deleted') }">Verwijderde
+          <router-link to="/deleted" :class="{ 'is-active': isActive('deleted') }">Verwijderde
             <br>notities
           </router-link>
         </li>
@@ -15,10 +15,10 @@
       <p class="menu-label">Andere</p>
       <ul class="menu-list">
         <li>
-          <router-link to="/about" v-on:click.native="setActive('about')" :class="{ 'is-active': isActive('about') }">Info</router-link>
+          <router-link to="/about" :class="{ 'is-active': isActive('about') }">Info</router-link>
         </li>
          <li>
-          <router-link to="/login" v-on:click.native="setActive('login')" :class="{ 'is-active': isActive('login') }">Inloggen</router-link>
+          <router-link to="/login" :class="{ 'is-active': isActive('login') }">Inloggen</router-link>
         </li>
       </ul>
     </aside>
@@ -27,17 +27,18 @@
 
 <script>
 export default {
-  data() {
-    return { activeItem: 'notes' }
-  },
+ 
   methods: {
     isActive: function (menuItem) {
-      return this.activeItem === menuItem
+      return this.activePage === menuItem
     },
-    setActive: function (menuItem) {
-      this.activeItem = menuItem 
+
+  },
+  computed:{
+    activePage(){
+      return this.$store.state.activePage;
     }
-  }
+  },
 };
 </script>
 

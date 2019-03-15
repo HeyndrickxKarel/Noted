@@ -25,6 +25,7 @@ $lightGray: rgb(151, 151, 151);
 $darkGray: rgb(175, 175, 175);
 
 .NotePreview {
+  
   .notename {
     font-weight: bold;
   }

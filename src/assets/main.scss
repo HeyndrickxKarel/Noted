@@ -1,6 +1,6 @@
-$primary: #de4b50;
+$danger: #de4b50;
 $lightGray : rgb(175, 175, 175);
-$menu-item-active-background-color: $primary;
+$menu-item-active-background-color: $danger;
 $menu-item-color:$lightGray;
 $menu-item-hover-background-color: #232629;
 $menu-item-hover-color: $lightGray;
@@ -14,7 +14,7 @@ $menu-item-hover-color: $lightGray;
     
 }
 .dark-icon:hover{
-    color: $primary
+    color: $danger
 }
 .large-icon{
     font-size: 20px;
