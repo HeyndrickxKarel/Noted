@@ -40,7 +40,7 @@
             </form>
           </div>
           <div class="column">
-            <h1 class="title">Meld u aan</h1>
+            <h1 class="title">Maak een account aan</h1>
             <form @submit.prevent="register">
               <div class="field">
                 <p class="control has-icons-left">
