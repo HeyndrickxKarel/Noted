@@ -8,7 +8,10 @@ export default new Vuex.Store({
     user : undefined,
     notes: [],
     activePage : 'notes',
-    statusMsg: ''
+    statusMsg: {
+      message : '',
+      type:''
+    }
   },
   mutations: {
     setUser(state,user){
@@ -23,15 +26,18 @@ export default new Vuex.Store({
     setActivePage(state, page){
       state.activePage = page
     },
-    setStatusMsg(state, content){
-      state.statusMsg = content
+    setStatusMsg(state, statusMsg){
+      state.statusMsg = statusMsg
       setTimeout(() => {
-        state.statusMsg = ''
-      },2000)
+        state.statusMsg = {
+          message : '',
+          type: ''
+        }
+      },4000)
       
     },
     discardStatusMsg(state){
-      state.statusMsg = ''
+      state.statusMsg = {}
     }
   },
   actions: {

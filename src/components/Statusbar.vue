@@ -1,9 +1,9 @@
 <template>
   <div>
       <transition name="drop-in" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-    <div class="notification statusbar is-info" v-if="statusMsg.length > 0">
+    <div class="notification statusbar" :class="statusMsg.type" v-if="statusMsg.message.length > 0">
       <button class="delete" v-on:click="discardStatusMsg"></button>
-      {{statusMsg}}
+      {{statusMsg.message}}
     </div>
     </transition>
   </div>
@@ -18,7 +18,7 @@ export default {
   },
   methods: {
       discardStatusMsg(){
-                this.$store.commit("discardStatusMsg");
+         this.$store.commit("discardStatusMsg");
       }
   }
 };

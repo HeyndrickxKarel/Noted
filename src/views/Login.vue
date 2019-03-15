@@ -104,8 +104,8 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => (this.$store.commit("setStatusMsg", "Account werd aangemaakt!")))
-        .catch(error => (this.$store.commit("setStatusMsg", error.message)));      
+        .then(() => (this.$store.commit("setStatusMsg", {message : "Account werd aangemaakt!", type:"is-info"})))
+        .catch(error => (this.$store.commit("setStatusMsg", {message : error.message, type:"is-danger"})));      
 
       this.email = "";
       this.password = "";
@@ -114,15 +114,15 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(() => (this.$store.commit("setStatusMsg", "Succesvol uitgelogd!")))
-        .catch(error => (this.$store.commit("setStatusMsg", error.message)));
+        .then(() => (this.$store.commit("setStatusMsg", {message : "Succesvol uitgelogd!", type:"is-info"})))
+        .catch(error => (this.$store.commit("setStatusMsg", {message : error.message, type:"is-danger"})));      
     },
     signIn() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => (this.$store.commit("setStatusMsg", "Succesvol ingelogd!")))
-        .catch(error => (this.$store.commit("setStatusMsg", error.message)));
+        .then(() => (this.$store.commit("setStatusMsg", {message : "Succesvol ingelogd!", type:"is-info"})))
+        .catch(error => (this.$store.commit("setStatusMsg", {message : error.message, type:"is-danger"})));      
     }
   },
   created() {
