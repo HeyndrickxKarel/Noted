@@ -3,7 +3,7 @@
     <div class="login">
       <div class="banner">
         <div class="stuff">
-          <h1 class="title">Time to get things noted</h1>
+          <h1 class="title">Time to get things Noted</h1>
           <img src="../assets/img/writingimage.png">
         </div>
       </div>
@@ -26,7 +26,7 @@
                 <a
                   v-on:click="setActionIsLogin(false)"
                   :class="{'darkGray':actionIsLogin, 'red-underline':!actionIsLogin}"
-                >Registreer</a>
+                >Join the club</a>
               </h1>
             </div>
           </div>

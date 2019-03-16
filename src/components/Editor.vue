@@ -138,6 +138,7 @@ import {
   Underline,
   History
 } from "tiptap-extensions";
+import { setTimeout, clearTimeout } from "timers";
 
 export default {
   components: {
@@ -170,15 +171,29 @@ export default {
           <h2>This is my <strong>first</strong> note</h2><hr><p></p><p>I am able to export my data as <s>javascript </s><code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.</p><p></p><h3>What can i do?</h3><p></p><p>All kinds of <strong>cool</strong> stuff like typing a coding block </p><pre><code>alert("You're awesome")</code></pre><p></p><p>or maybe make a list like so</p><p></p><ul><li><p>This</p></li><li><p>is </p></li><li><p>Amazing</p></li></ul><h3></h3><blockquote><h1>What can i do</h1></blockquote><p></p>
         `,
         onUpdate: ({ getJSON, getHTML }) => {
-          this.json = getJSON();
-          this.html = getHTML();
+          if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = undefined;
+          }
+          
+          this.timer = setTimeout(function() {
+            alert("content was saved");
+            this.json = getJSON();
+            this.html = getHTML();
+          }, 2000);
         }
       }),
       json: "Update content to see changes",
-      html: "Update content to see changes"
+      html: "Update content to see changes",
+      timer: undefined
     };
   },
   methods: {
+    saveContent(getJSON, getHTML) {
+      alert("content was saved");
+      this.json = getJSON();
+      this.html = getHTML();
+    },
     clearContent() {
       this.editor.clearContent(true);
       this.editor.focus();

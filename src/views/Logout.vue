@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div class="logout">     
-      <div>
-        <h1>Afmelden</h1>
-        <p>{{user}}</p>
-        <p class="has-text-left">
-          <button v-on:click="logout" class="button is-primary">Afmelden</button>
-        </p>
-      </div>
+    <div class="logout">
+      <section class="hero is-large has-text-centered">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Afmelden</h1>
+                      <button v-on:click="logout" class="button is-primary">Afmelden</button>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -28,10 +29,19 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(() => { this.$store.commit("setStatusMsg", {message : "Succesvol uitgelogd!", type:"is-info"})
-          this.$router.push('/')}         
-        )
-        .catch(error => (this.$store.commit("setStatusMsg", {message : error.message, type:"is-danger"})));      
+        .then(() => {
+          this.$store.commit("setStatusMsg", {
+            message: "Succesvol uitgelogd!",
+            type: "is-info"
+          });
+          this.$router.push("/");
+        })
+        .catch(error =>
+          this.$store.commit("setStatusMsg", {
+            message: error.message,
+            type: "is-danger"
+          })
+        );
     }
   },
   mounted() {
@@ -41,5 +51,4 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>
