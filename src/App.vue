@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <div class="columns is-mobile">
-      <div class="column is-narrow">
-        <NavMenu/>
-      </div>
-      <div class="column backgroundcolor">
-        <router-view/>
+    <div v-if="user">
+      <div class="columns is-mobile">
+        <div class="column is-narrow">
+          <NavMenu/>
+        </div>
+        <div class="column backgroundcolor">
+          <router-view/>
+        </div>
       </div>
     </div>
-    <div class="statusbarContainer">
-    <Statusbar />
+    <div v-else>
+      <Login/>
     </div>
+          <div class="statusbarContainer">
+        <Statusbar/>
+      </div>
   </div>
 </template>
 
@@ -19,21 +24,30 @@
 // @ is an alias to /src
 import NavMenu from "@/components/NavMenu.vue";
 import Statusbar from "@/components/Statusbar.vue";
+import Login from "@/components/Login.vue";
 
 export default {
   name: "app",
   components: {
-    NavMenu, Statusbar
+    NavMenu,
+    Statusbar,
+    Login
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    }
   }
-  
 };
 </script>
 
 
 <style>
-
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css";
 
+html{
+  overflow-y: hidden !important;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,15 +62,15 @@ h3 {
 }
 h1 {
   font-size: 2rem !important;
-  color: #363636 !important;
 }
 h2 {
   font-size: 1.6rem !important;
-  color: #4a4a4a !important;
 }
 h3 {
   font-size: 1.25rem !important;
-  color: #363636 !important;
+}
+h1 {
+    margin-bottom: 40px !important;
 }
 
 code {
@@ -75,14 +89,38 @@ hr {
   background-color: #d4d4d4 !important;
   height: 1px !important;
 }
-.backgroundcolor{
+.backgroundcolor {
   background-color: #fafafa;
+}
+.statusbarContainer {
+  position: absolute;
+  width: 80%;
+  bottom: 10px;
+  left: 10%;
+}
 
+.fly-in {
+  animation: fly-in 4s;
 }
-.statusbarContainer{
-    position: absolute;
-    width: 80%;
-    bottom: 10px;
-    left: 10%;
+.fly-in-enter-active {
+  animation: fly-in 0.5s;
 }
+.fly-in-leave-active {
+  animation: fly-in 0.5s reverse;
+}
+@keyframes fly-in {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 </style>

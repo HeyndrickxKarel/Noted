@@ -18,7 +18,7 @@
           <router-link to="/about" :class="{ 'is-active': isActive('about') }">Info</router-link>
         </li>
          <li>
-          <router-link to="/login" :class="{ 'is-active': isActive('login') }">Inloggen</router-link>
+          <router-link to="/logout" :class="{ 'is-active': isActive('logout') }">Log uit</router-link>
         </li>
       </ul>
     </aside>
@@ -44,9 +44,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+@import "../assets/variables.scss";
+
+
 .menu {
   padding: 30px !important;
-  background-color: #34373b;
+  background-color: $darkblue;
   height: 100vh;
 }
 

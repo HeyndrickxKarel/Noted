@@ -87,8 +87,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$lightGray: rgb(151, 151, 151);
-$darkGray: rgb(175, 175, 175);
+
+@import "../assets/variables.scss";
+
 
 ::-webkit-scrollbar {
   display: none;

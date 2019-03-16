@@ -1,5 +1,6 @@
-$danger: #de4b50;
-$lightGray : rgb(175, 175, 175);
+
+@import "./variables.scss";
+
 $menu-item-active-background-color: $danger;
 $menu-item-color:$lightGray;
 $menu-item-hover-background-color: #232629;
@@ -11,7 +12,6 @@ $menu-item-hover-color: $lightGray;
     color: $lightGray;
     cursor: pointer;
     transition: 0.4s;
-    
 }
 .dark-icon:hover{
     color: $danger
@@ -19,12 +19,20 @@ $menu-item-hover-color: $lightGray;
 .large-icon{
     font-size: 20px;
 }
-.column{
-    padding: 0 !important;
-    .columns {
-        margin-top: 0px !important;
-        margin-left: 0px !important;
-        margin-right: 0px !important;
+.columns {
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    .column{
+        padding: 0 !important;    
       }
+}
+.darkGray{
+    color: $darkGray !important;
+}
+
+.red-underline{
+    text-decoration: underline;
+    text-decoration-color: $danger;
   }
   
