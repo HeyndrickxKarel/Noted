@@ -217,6 +217,7 @@ export default {
         padding: 0px 0px 20px 0px;
         margin-top: 10px;
         margin-bottom: 30px;
+        border-radius: 0px;
       }
       input::placeholder {
         color: $lightGray;

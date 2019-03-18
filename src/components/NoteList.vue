@@ -3,11 +3,12 @@
     <div class="noteShort window searchBar">
       <div class="columns is-mobile topContainer">
         <div class="column">
-          <p class="control has-icons-right searchBox">
-            <input class="input is-rounded" type="text" placeholder="Zoek">
-            <span class="icon is-small is-right">
-              <font-awesome-icon icon="search" class="dark-icon"/>
+          
+          <p class="control has-icons-left searchBox">
+                        <span class="icon is-small is-right">
+              <font-awesome-icon icon="search" class="dark-icon fa"/>
             </span>
+            <input class="input" type="text" placeholder="Zoek naar een notitie">
           </p>
         </div>
         <div class="column is-narrow newItem">
@@ -126,5 +127,15 @@ export default {
 }
 .searchBox {
   margin-left: 10px;
+  .input{
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0px;
+  }
+  .fa{
+    cursor: pointer;
+  }
 }
+
 </style>

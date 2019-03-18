@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <transition name="fade-in" enter-active-class="animated fadeIn">
           <div v-if="user">
       <div class="columns is-mobile">
         <div class="column is-narrow">
@@ -11,14 +10,9 @@
         </div>
       </div>
     </div>
-    </transition>
-    <transition name="fade-in" enter-active-class="animated fadeIn" >
           <div v-if="!user">
       <Login/>
     </div>
-    </transition>
-
-
           <div class="statusbarContainer">
         <Statusbar/>
       </div>
