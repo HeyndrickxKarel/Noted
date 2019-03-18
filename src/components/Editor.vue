@@ -167,20 +167,11 @@ export default {
           new Underline(),
           new History()
         ],
-        content: `
-          <h2>This is my <strong>first</strong> note</h2><hr><p></p><p>I am able to export my data as <s>javascript </s><code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.</p><p></p><h3>What can i do?</h3><p></p><p>All kinds of <strong>cool</strong> stuff like typing a coding block </p><pre><code>alert("You're awesome")</code></pre><p></p><p>or maybe make a list like so</p><p></p><ul><li><p>This</p></li><li><p>is </p></li><li><p>Amazing</p></li></ul><h3></h3><blockquote><h1>What can i do</h1></blockquote><p></p>
-        `,
+        content: `<h2>This is my <strong>first</strong> note</h2><hr><p></p><p>I am able to export my data as <s>javascript </s><code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.</p><p></p><h3>What can i do?</h3><p></p><p>All kinds of <strong>cool</strong> stuff like typing a coding block </p><pre><code>alert("You're awesome")</code></pre><p></p><p>or maybe make a list like so</p><p></p><ul><li><p>This</p></li><li><p>is </p></li><li><p>Amazing</p></li></ul><h3></h3><blockquote><h1>What can i do</h1></blockquote><p></p>`,
+
         onUpdate: ({ getJSON, getHTML }) => {
-          if (this.timer) {
-            clearTimeout(this.timer);
-            this.timer = undefined;
-          }
-          
-          this.timer = setTimeout(function() {
-            alert("content was saved");
-            this.json = getJSON();
-            this.html = getHTML();
-          }, 2000);
+          this.json = getJSON();
+          this.html = getHTML();
         }
       }),
       json: "Update content to see changes",
@@ -189,37 +180,33 @@ export default {
     };
   },
   methods: {
-    saveContent(getJSON, getHTML) {
-      alert("content was saved");
-      this.json = getJSON();
-      this.html = getHTML();
-    },
     clearContent() {
       this.editor.clearContent(true);
       this.editor.focus();
     },
-    setContent() {
-      // you can pass a json document
-      this.editor.setContent(
-        {
-          type: "doc",
-          content: [
-            {
-              type: "paragraph",
-              content: [
-                {
-                  type: "text",
-                  text: "This is some inserted text. 👋"
-                }
-              ]
-            }
-          ]
-        },
-        true
-      );
-      // HTML string is also supported
-      // this.editor.setContent('<p>This is some inserted text. 👋</p>')
-      this.editor.focus();
+    test() {
+      alert("test");
+    }
+  },
+  computed: {
+    activeNote() {
+      return this.$store.getters.activeNote;
+    }
+  },
+  watch: {
+    activeNote(newNote) {
+      this.editor.setContent(newNote);
+    },
+    json: function(newJson) {
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = undefined;
+      }
+
+      this.timer = setTimeout(() => {
+        console.log(this.json);
+        this.$store.commit("updateActiveNote", newJson);
+      }, 1000);
     }
   }
 };
@@ -242,13 +229,22 @@ export default {
   height: 100vh;
   outline: none;
   padding: 6%;
-  padding-top: 2%;
 }
 .menubar {
+  -webkit-transition: 0.4s;
   transition: 0.4s;
-  margin-top: 20px;
+  padding-top: 20px;
   opacity: 0;
   text-align: center;
+  position: absolute;
+  right: 0;
+  top: 5%;
+  height: 90%;
+  /*
+    border: 1px solid #979797;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    */
 }
 .menubar:hover {
   opacity: 1;
@@ -258,11 +254,14 @@ export default {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 17px;
   color: #959595 !important;
   font-weight: bold;
+  -webkit-transition: 0.4s;
   transition: 0.4s;
-  margin: 10px 10px 0px 10px;
+  margin: 0px 10px 0px 10px;
+  display: block;
+  height: 7%;
 }
 .menubar__button:hover {
   color: #de4b50 !important;

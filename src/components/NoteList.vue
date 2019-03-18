@@ -1,6 +1,6 @@
 <template>
   <div class="NoteList">
-    <div class="noteShort window searchBar">
+    <div class="window searchBar">
       <div class="columns is-mobile topContainer">
         <div class="column">
           
@@ -18,47 +18,8 @@
     </div>
     <div class="scrollable noteListItems"> 
       <div class="dummyBox"></div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
-    </div>
-    <div class="noteShort window">
-      <NotePreview/>
+    <div class="noteShort window" v-for="(note,index) in notes" :key="index">
+      <NotePreview :title="note.content[0].content[0].text" :subtitle="note.content[1].content[0].text" :date="new Date()" :number="index"/>
     </div>
     </div>
    
@@ -72,17 +33,11 @@ export default {
   components: {
     NotePreview
   },
-  data() {
-    return {
-      notes: [
-        {
-          content: "Bachelorproef bedenkingen",
-          contentHTML: "",
-          date: new Date()
-        }
-      ]      
-    };
-  }
+  computed: {
+    notes() {
+      return this.$store.getters.notes;
+    }
+  },
 };
 </script>
 
@@ -112,11 +67,11 @@ export default {
   height: 70px;
     position: absolute;
     width: 100%;
-    background-color: #fafafad9;
+    background-color: $backgroundColor;
+    padding: 10px;
 }
 .window {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding: 10px;
 }
 .newItem {
   margin: 6px 10px 6px 20px;
@@ -137,5 +92,8 @@ export default {
     cursor: pointer;
   }
 }
-
+.noteShort:hover{
+  background-color: $backgroundColorDark;
+  cursor:pointer;
+}
 </style>

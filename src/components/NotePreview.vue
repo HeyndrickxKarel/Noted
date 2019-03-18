@@ -1,36 +1,46 @@
 <template>
-  <div class="NotePreview">
-    <p class="notename">{{note.content.split("\n")[0]}}</p>
-    <p class="notecontent">{{note.content.split("\n")[1]}}</p>
-    <p class="notedate">{{note.date | formatDate}}</p>
+  <div class="NotePreview" v-on:click="setActiveNote">
+    <p class="notename">{{activeNote.content[0].content[0].text}}</p>
+    <p class="notecontent">{{activeNote.content[1].content[0].text}}</p>
+    <p class="notedate">{{date | formatDate}}</p>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      note: {
-        content: "Dit is de titel \n This is de test",
-        contentHTML: "",
-        date: new Date()
-      }
-    };
+  props: {
+    title: String,
+    subtitle: String,
+    date: Date,
+    number: Number
+  },
+  methods: {
+    setActiveNote(){
+      this.$store.commit("setActiveNote", this.number);
+    },
+  },
+  computed: {
+    activeNote(){
+      return this.$store.getters.noteByIndex(this.number);
+    }
   }
+
 };
 </script>
 
 <style lang="scss">
-$lightGray: rgb(151, 151, 151);
-$darkGray: rgb(175, 175, 175);
+
+@import "../assets/variables.scss";
+
 
 .NotePreview {
+padding: 10px;
   
   .notename {
     font-weight: bold;
   }
   .notecontent {
-    color: darkgray;
+    color: $almostdarkGray;
   }
   .notedate {
     text-align: right;

@@ -58,7 +58,9 @@
                 v-model="password"
                 name="password"
                 placeholder="*******"
-                data-vv-delay="1000" ref="password" data-vv-as="password"
+                data-vv-delay="1000"
+                ref="password"
+                data-vv-as="password"
               >
               <transition name="fly-in">
                 <div
@@ -112,13 +114,13 @@ export default {
   },
   methods: {
     submit() {
-       this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then(result => {
         if (result) {
-            this.actionIsLogin ? this.signIn() : this.register();
+          this.actionIsLogin ? this.signIn() : this.register();
         } else {
           // Do nothing
-        }});
-     
+        }
+      });
     },
     setActionIsLogin(value) {
       this.actionIsLogin = value;
@@ -148,12 +150,12 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(() =>
+        .then(() => {
           this.$store.commit("setStatusMsg", {
             message: "Tot later!",
             type: "is-info"
-          })
-        )
+          });
+        })
         .catch(error =>
           this.$store.commit("setStatusMsg", {
             message: error.message,
@@ -170,7 +172,10 @@ export default {
             message: error.message,
             type: "is-danger"
           })
-        );
+        )
+        .then(response => {
+          this.$store.dispatch("loadNotes", response.user.uid)
+        });
     }
   },
   created() {
