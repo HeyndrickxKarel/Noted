@@ -31,13 +31,6 @@
             </div>
           </div>
           <form @submit.prevent="submit">
-            <transition name="fly-in">
-              <div class="field" v-if="!actionIsLogin">
-                <label class="label">Naam</label>
-                <input type="text" class="input" v-model="name" placeholder="Geef uw naam in">
-              </div>
-            </transition>
-
             <div class="field">
               <label class="label">E-mailadres</label>
               <input
@@ -45,12 +38,54 @@
                 class="input"
                 v-model="email"
                 placeholder="Uw e-mailadres mag hier"
+                v-validate="'required'"
+                name="email"
+                data-vv-delay="1000"
               >
+              <transition name="fly-in">
+                <div
+                  v-if="errors.has('email')"
+                  class="notification is-warning is-danger"
+                >Gelieve een geldig e-mailadres in te geven</div>
+              </transition>
             </div>
             <div class="field">
               <label class="label">Wachtwoord</label>
-              <input type="password" class="input" v-model="password" placeholder="*******">
+              <input
+                type="password"
+                class="input"
+                v-validate="'required'"
+                v-model="password"
+                name="password"
+                placeholder="*******"
+                data-vv-delay="1000" ref="password" data-vv-as="password"
+              >
+              <transition name="fly-in">
+                <div
+                  v-if="errors.has('password')"
+                  class="notification is-warning is-danger"
+                >{{actionIsLogin? "Gelieve uw wachtwoord in te geven":"Gelieve een wachtwoord in te geven groter als 6 karaters"}}</div>
+              </transition>
             </div>
+            <transition name="fly-in">
+              <div class="field" v-if="!actionIsLogin">
+                <label class="label">Herhaal wachtwoord</label>
+                <input
+                  type="password"
+                  class="input"
+                  name="password_confirmation"
+                  v-validate="'required|confirmed:password'"
+                  placeholder="*******"
+                  data-vv-delay="1000"
+                >
+                <transition name="fly-in">
+                  <div
+                    v-if="errors.has('password_confirmation')"
+                    class="notification is-danger"
+                  >Dit wachtwoord komt niet overeen met het bovenstaande</div>
+                </transition>
+              </div>
+            </transition>
             <div class="field">
               <p class="control has-text-right">
                 <button type="submit" class="button is-link is-rounded">Let's go!</button>
@@ -77,7 +112,13 @@ export default {
   },
   methods: {
     submit() {
-      this.actionIsLogin ? this.signIn() : this.register();
+       this.$validator.validateAll().then(result => {
+        if (result) {
+            this.actionIsLogin ? this.signIn() : this.register();
+        } else {
+          // Do nothing
+        }});
+     
     },
     setActionIsLogin(value) {
       this.actionIsLogin = value;

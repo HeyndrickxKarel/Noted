@@ -8,12 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import moment from 'moment'
 import firebaseInit from './firebaseInit'
 import firebaseConfig from './firebaseConfig'
+import VeeValidate from 'vee-validate';
 
 library.add(faSearch,faEdit, faBold, faItalic, faCode, faParagraph, faListUl, faListOl, faExpand, faStrikethrough, faUnderline, faQuoteRight, faMinus, faLock, faEnvelope)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-
+Vue.use(VeeValidate);
 Vue.config.productionTip = false
 
 require("./assets/main.scss")
