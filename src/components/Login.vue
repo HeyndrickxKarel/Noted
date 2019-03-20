@@ -172,10 +172,7 @@ export default {
             message: error.message,
             type: "is-danger"
           })
-        )
-        .then(response => {
-          this.$store.dispatch("loadNotes", response.user.uid)
-        });
+        );
     }
   },
   created() {
@@ -214,6 +211,7 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
+      width: 70%;
       h1 {
         color: $lightestGray;
       }

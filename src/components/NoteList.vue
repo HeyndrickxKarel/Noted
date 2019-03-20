@@ -4,11 +4,18 @@
       <div class="columns is-mobile topContainer">
         <div class="column">
           
-          <p class="control has-icons-left searchBox">
-                        <span class="icon is-small is-right">
+          <p class="control has-icons-left has-icons-right searchBox">
+               <span class="icon is-small is-left">
               <font-awesome-icon icon="search" class="dark-icon fa"/>
             </span>
-            <input class="input" type="text" placeholder="Zoek naar een notitie">
+            <input class="input" type="text" placeholder="Zoek naar een notitie" v-model="search">
+            <transition name="fly-in">              
+              <span class="icon is-small is-right " v-if="search.length > 0"  >
+            <button class="is-right delete" v-on:click="clearSearch">
+
+            </button>
+            </span>         
+            </transition>
           </p>
         </div>
         <div class="column is-narrow newItem">
@@ -18,8 +25,8 @@
     </div>
     <div class="scrollable noteListItems"> 
       <div class="dummyBox"></div>
-    <div class="noteShort window" v-for="(note,index) in notes" :key="index">
-      <NotePreview :title="note.content[0].content[0].text" :subtitle="note.content[1].content[0].text" :date="new Date()" :number="index"/>
+    <div class="noteShort window" v-for="(note,index) in filteredNotes" :key="index">
+      <NotePreview :note="note"/>
     </div>
     </div>
    
@@ -33,12 +40,34 @@ export default {
   components: {
     NotePreview
   },
-  computed: {
-    notes() {
-      return this.$store.getters.notes;
+  methods: {
+    clearSearch(){
+      this.search = '';
     }
   },
-};
+  data(){
+    return {
+      search: '',
+      watchedNotes : undefined
+    }
+  },
+  computed: {
+    notes() {    
+      return this.$store.getters.notes;
+    },
+    filteredNotes(){
+      let notes  = this.notes;     
+       if (this.search != "") {
+        notes = notes.filter(n => {
+          return n.content[0].content[0].text.toLowerCase().split(" ").includes(this.search.toLowerCase()) == true 
+          || n.content[0].content[0].text.toLowerCase().startsWith(this.search.toLowerCase());
+        });
+      }
+      return notes;
+    }
+  }
+
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

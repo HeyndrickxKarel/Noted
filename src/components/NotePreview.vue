@@ -1,30 +1,25 @@
 <template>
   <div class="NotePreview" v-on:click="setActiveNote">
-    <p class="notename">{{activeNote.content[0].content[0].text}}</p>
-    <p class="notecontent">{{activeNote.content[1].content[0].text}}</p>
-    <p class="notedate">{{date | formatDate}}</p>
+    <p class="notename">{{note.content[0].content[0].text }}</p>
+    <p class="notecontent">{{note.content[1].content[0].text}}</p>
+    <p class="notedate">{{note.dateCreated | formatDate}}</p>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    title: String,
-    subtitle: String,
-    date: Date,
-    number: Number
+    note: {
+      type: Object
+    },
+    date: Date
   },
   methods: {
     setActiveNote(){
-      this.$store.commit("setActiveNote", this.number);
+      this.$store.commit("setActiveNoteByNote", this.note);
+      this.$store.commit("toggleNoteWasClicked")
     },
   },
-  computed: {
-    activeNote(){
-      return this.$store.getters.noteByIndex(this.number);
-    }
-  }
-
 };
 </script>
 

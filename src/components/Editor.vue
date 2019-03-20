@@ -183,9 +183,6 @@ export default {
     clearContent() {
       this.editor.clearContent(true);
       this.editor.focus();
-    },
-    test() {
-      alert("test");
     }
   },
   computed: {
@@ -195,7 +192,10 @@ export default {
   },
   watch: {
     activeNote(newNote) {
-      this.editor.setContent(newNote);
+      if (this.$store.getters.noteWasClicked) {
+        this.editor.setContent(newNote);
+        this.$store.commit("toggleNoteWasClicked");
+      }
     },
     json: function(newJson) {
       if (this.timer) {
@@ -204,7 +204,7 @@ export default {
       }
 
       this.timer = setTimeout(() => {
-        console.log(this.json);
+        this.json.dateCreated = new Date();
         this.$store.commit("updateActiveNote", newJson);
       }, 1000);
     }

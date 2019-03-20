@@ -15,7 +15,9 @@ export default new Vuex.Store({
       message: '',
       type: ''
     },
-    activeNote : undefined
+    activeNote : undefined,
+    noteWasClicked: true
+    
   },
   mutations: {
     setUser(state, user) {
@@ -23,9 +25,6 @@ export default new Vuex.Store({
     },
     setNotes(state, notes) {
       state.notes = notes
-    },
-    getNote(state, index) {
-      return state.notes[index];
     },
     setActivePage(state, page) {
       state.activePage = page
@@ -55,11 +54,31 @@ export default new Vuex.Store({
     setActiveNote(state,index){
       state.activeNote = index;
     },
+    setActiveNoteByNote(state, note){
+      console.log("");
+      console.log("Wil deze note instellen als active");      
+      console.log(note.content[0].content[0].text);
+      for(var i = 0; i < state.notes.length; i += 1) {
+        console.log(state.notes[i].dateCreated)
+        if(new Date(state.notes[i].dateCreated).getTime() == new Date(note.dateCreated).getTime()) {
+          console.log("geraakt hier");
+          state.activeNote = i
+        }
+    }
+
+      console.log("Noteindex set to " + state.activeNote);
+    },
+   toggleNoteWasClicked(state){
+    state.noteWasClicked = !state.noteWasClicked;
+   },
     updateActiveNote(state, newNote){
+      console.log("");
       console.log("active node is")
       console.log(state.activeNote);
 
       state.notes[state.activeNote] = newNote;
+      Vue.set(state.notes, state.activeNote, newNote)
+
 
       console.log("nieuwe active note")
       console.log(state.notes[state.activeNote]);
@@ -69,8 +88,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    loadNotes({commit}, firebaseUserId) {
-      axios.get(baseURL + firebaseUserId)
+    loadNotes({commit}, user) {
+      axios.get(baseURL + user.uid)
         .then(function (response) {
           let notes = response.data[0].notes;
           commit('receiveLoadedNotes',notes)
@@ -98,6 +117,9 @@ export default new Vuex.Store({
     notes(state){
       return state.notes;
     },
-    noteByIndex: state => index => state.notes[index]
+    noteByIndex: state => index => state.notes[index],
+    noteWasClicked(state){
+      return state.noteWasClicked;
+    }
   }
 })
