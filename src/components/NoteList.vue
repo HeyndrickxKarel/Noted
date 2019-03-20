@@ -3,18 +3,15 @@
     <div class="window searchBar">
       <div class="columns is-mobile topContainer">
         <div class="column">
-          
           <p class="control has-icons-left has-icons-right searchBox">
-               <span class="icon is-small is-left">
+            <span class="icon is-small is-left">
               <font-awesome-icon icon="search" class="dark-icon fa"/>
             </span>
             <input class="input" type="text" placeholder="Zoek naar een notitie" v-model="search">
-            <transition name="fly-in">              
-              <span class="icon is-small is-right " v-if="search.length > 0"  >
-            <button class="is-right delete" v-on:click="clearSearch">
-
-            </button>
-            </span>         
+            <transition name="fly-in">
+              <span class="icon is-small is-right" v-if="search.length > 0">
+                <button class="is-right delete" v-on:click="clearSearch"></button>
+              </span>
             </transition>
           </p>
         </div>
@@ -23,13 +20,17 @@
         </div>
       </div>
     </div>
-    <div class="scrollable noteListItems"> 
+    <div class="scrollable noteListItems">
       <div class="dummyBox"></div>
-    <div class="noteShort window" v-for="(note,index) in filteredNotes" :key="index">
-      <NotePreview :note="note"/>
+      <div
+        class="noteShort window"
+        v-for="(note,index) in filteredNotes"
+        :key="index"
+        :class="{ 'is-active-note': activeNoteIndex == index }"
+      >
+        <NotePreview :note="note"/>
+      </div>
     </div>
-    </div>
-   
   </div>
 </template>
 
@@ -41,63 +42,70 @@ export default {
     NotePreview
   },
   methods: {
-    clearSearch(){
-      this.search = '';
+    clearSearch() {
+      this.search = "";
     }
   },
-  data(){
+  data() {
     return {
-      search: '',
-      watchedNotes : undefined
-    }
+      search: "",
+      watchedNotes: undefined
+    };
   },
   computed: {
-    notes() {    
+    notes() {
       return this.$store.getters.notes;
     },
-    filteredNotes(){
-      let notes  = this.notes;     
-       if (this.search != "") {
+    activeNoteIndex() {
+      return this.$store.getters.activeNoteIndex;
+    },
+    filteredNotes() {
+      let notes = this.notes;
+      if (this.search != "") {
         notes = notes.filter(n => {
-          return n.content[0].content[0].text.toLowerCase().split(" ").includes(this.search.toLowerCase()) == true 
-          || n.content[0].content[0].text.toLowerCase().startsWith(this.search.toLowerCase());
+          return (
+            n.content[0].content[0].text
+              .toLowerCase()
+              .split(" ")
+              .includes(this.search.toLowerCase()) == true ||
+            n.content[0].content[0].text
+              .toLowerCase()
+              .startsWith(this.search.toLowerCase())
+          );
         });
       }
       return notes;
     }
   }
-
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 @import "../assets/variables.scss";
-
 
 ::-webkit-scrollbar {
   display: none;
 }
-.scrollable{
-  overflow-y: scroll;  
+.scrollable {
+  overflow-y: scroll;
 }
-.noteListItems{
-  height: 100%
+.noteListItems {
+  height: 100%;
 }
-.dummyBox{
+.dummyBox {
   height: 70px;
 }
 .NoteList {
   height: 100vh;
   position: relative;
 }
-.searchBar{
+.searchBar {
   height: 70px;
-    position: absolute;
-    width: 100%;
-    background-color: $backgroundColor;
-    padding: 10px;
+  position: absolute;
+  width: 100%;
+  background-color: $backgroundColor;
+  padding: 10px;
 }
 .window {
   border-bottom: 1px solid rgb(212, 212, 212);
@@ -111,18 +119,27 @@ export default {
 }
 .searchBox {
   margin-left: 10px;
-  .input{
+  .input {
     border: none;
     background-color: transparent;
     box-shadow: none;
     border-radius: 0px;
   }
-  .fa{
+  .fa {
     cursor: pointer;
   }
 }
-.noteShort:hover{
-  background-color: $backgroundColorDark;
-  cursor:pointer;
+.noteShort {
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    padding-left: 8px;
+  }
+  border-left: 0px solid $danger;
+}
+
+.is-active-note {
+  border-left: 8px solid $danger !important;
+  padding-left: 0px !important;
 }
 </style>

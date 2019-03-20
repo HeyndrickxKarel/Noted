@@ -120,6 +120,9 @@ export default new Vuex.Store({
     noteByIndex: state => index => state.notes[index],
     noteWasClicked(state){
       return state.noteWasClicked;
+    },
+    activeNoteIndex(state){
+      return state.activeNote;
     }
   }
 })
