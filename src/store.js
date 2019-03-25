@@ -85,6 +85,23 @@ export default new Vuex.Store({
 
       console.log("alle notes");
       console.log(state.notes);
+    },
+    createNote(state){
+      var newNote = {
+        dateCreated : new Date(),
+        type:'doc',
+        content :  [
+          {
+            "type": "heading",
+            "attrs": {
+              "level": 1
+            }
+          }
+        ]
+      };
+      Vue.set(state.notes, state.notes.length, newNote)
+      state.noteWasClicked = !state.noteWasClicked;
+      state.activeNote = state.notes.length - 1;
     }
   },
   actions: {
