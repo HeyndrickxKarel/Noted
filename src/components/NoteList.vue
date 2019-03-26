@@ -24,9 +24,9 @@
       <div class="dummyBox"></div>
       <div
         class="noteShort window"
-        v-for="(note,index) in notes"
+        v-for="(note,index) in filteredNotes"
         :key="index"
-        :class="{ 'is-active-note': activeNoteIndex == index }"
+        :class="{ 'is-active-note': new Date(activeNote.dateCreated).getTime() == new Date(note.dateCreated).getTime() }"
       >
         <NotePreview :note="note"/>
       </div>
@@ -60,6 +60,9 @@ export default {
     },
     activeNoteIndex() {
       return this.$store.getters.activeNoteIndex;
+    },
+    activeNote(){
+      return this.$store.getters.activeNote;
     },
     filteredNotes() {
       let notes = this.notes;
