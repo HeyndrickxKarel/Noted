@@ -15,7 +15,7 @@
             </transition>
           </p>
         </div>
-        <div class="column is-narrow newItem">
+        <div class="column is-narrow newItem" v-on:click="createNote">
           <font-awesome-icon icon="edit" class="dark-icon large-icon"/>
         </div>
       </div>
@@ -24,7 +24,7 @@
       <div class="dummyBox"></div>
       <div
         class="noteShort window"
-        v-for="(note,index) in filteredNotes"
+        v-for="(note,index) in notes"
         :key="index"
         :class="{ 'is-active-note': activeNoteIndex == index }"
       >
@@ -44,12 +44,14 @@ export default {
   methods: {
     clearSearch() {
       this.search = "";
+    },
+    createNote(){
+      this.$store.commit("createNote");
     }
   },
   data() {
     return {
       search: "",
-      watchedNotes: undefined
     };
   },
   computed: {

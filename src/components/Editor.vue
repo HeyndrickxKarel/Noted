@@ -190,11 +190,15 @@ export default {
       return this.$store.getters.activeNote;
     }
   },
+  mounted(){
+    this.editor.setContent(this.$store.getters.activeNote);
+  },
   watch: {
     activeNote(newNote) {
       if (this.$store.getters.noteWasClicked) {
         this.editor.setContent(newNote);
         this.$store.commit("toggleNoteWasClicked");
+        this.editor.focus();
       }
     },
     json: function(newJson) {
