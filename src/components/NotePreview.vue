@@ -1,5 +1,5 @@
 <template>
-  <div class="NotePreview" v-on:click="setActiveNote">
+  <div class="NotePreview" v-on:click="setActiveNoteIndex">
     <p class="notename">{{note.content[0].content != undefined? note.content[0].content[0].text:"Nieuwe notitie" }}</p>
     <p class="notecontent">{{note.content[1] != undefined ? note.content[1].content[0].text :  ''}}</p>
     <p class="notedate">{{note.dateCreated | formatDate}}</p>
@@ -14,8 +14,9 @@ export default {
     }
   },
   methods: {
-    setActiveNote(){
-      this.$store.commit("setActiveNoteByNote", this.note);
+    setActiveNoteIndex(){
+      this.$store.commit("setActiveNoteIndexByNote",this.note);
+      this.$store.commit("toggleNoteWasClicked");
     },
   },
 };

@@ -15,7 +15,7 @@ export default new Vuex.Store({
       message: '',
       type: ''
     },
-    activeNote : undefined,
+    activeNoteIndex : undefined,
     noteWasClicked: true
     
   },
@@ -48,25 +48,27 @@ export default new Vuex.Store({
     receiveLoadedNotes(state, notes) {
       state.notes = notes;
       if (state.notes.length > 0){
-        state.activeNote = 0;
+        state.activeNoteIndex = 0;
       }
     },
-    setActiveNote(state,index){
-      state.activeNote = index;
+    setActiveNoteIndex(state,index){
+      state.activeNoteIndex = index;
     },
-    setActiveNoteByNote(state, note){
+    setActiveNoteIndexByNote(state, note){
+      /*
       console.log("");
-      console.log("Wil deze note instellen als active");      
-      console.log(note.content[0].content[0].text);
+      console.log("Wil deze note instellen als active");     
+      console.log(note) ;
+      */
       for(var i = 0; i < state.notes.length; i += 1) {
-        console.log(state.notes[i].dateCreated)
+        //console.log(state.notes[i].dateCreated)
         if(new Date(state.notes[i].dateCreated).getTime() == new Date(note.dateCreated).getTime()) {
-          console.log("geraakt hier");
-          state.activeNote = i
+         // console.log("geraakt hier");
+          state.activeNoteIndex = i
         }
     }
 
-      console.log("Noteindex set to " + state.activeNote);
+      console.log("Noteindex set to " + state.activeNoteIndex);
     },
    toggleNoteWasClicked(state){
     state.noteWasClicked = !state.noteWasClicked;
@@ -74,14 +76,14 @@ export default new Vuex.Store({
     updateActiveNote(state, newNote){
       console.log("");
       console.log("active node is")
-      console.log(state.activeNote);
+      console.log(state.activeNoteIndex);
 
-      state.notes[state.activeNote] = newNote;
-      Vue.set(state.notes, state.activeNote, newNote)
+      state.notes[state.activeNoteIndex] = newNote;
+      Vue.set(state.notes, state.activeNoteIndex, newNote)
 
 
       console.log("nieuwe active note")
-      console.log(state.notes[state.activeNote]);
+      console.log(state.notes[state.activeNoteIndex]);
 
       console.log("alle notes");
       console.log(state.notes);
@@ -101,7 +103,7 @@ export default new Vuex.Store({
       };
       Vue.set(state.notes, state.notes.length, newNote)
       state.noteWasClicked = !state.noteWasClicked;
-      state.activeNote = state.notes.length - 1;
+      state.activeNoteIndex = state.notes.length - 1;
     }
   },
   actions: {
@@ -129,7 +131,7 @@ export default new Vuex.Store({
       return state.statusMsg
     },
     activeNote(state){
-      return state.notes[state.activeNote];
+      return state.notes[state.activeNoteIndex];
     },
     notes(state){
       return state.notes;
@@ -139,7 +141,7 @@ export default new Vuex.Store({
       return state.noteWasClicked;
     },
     activeNoteIndex(state){
-      return state.activeNote;
+      return state.activeNoteIndex;
     }
   }
 })
