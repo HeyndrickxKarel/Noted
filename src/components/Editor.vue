@@ -210,6 +210,7 @@ export default {
       this.timer = setTimeout(() => {
         this.json.dateCreated = new Date();
         this.$store.commit("updateActiveNote", newJson);
+        this.$store.commit("saveNotes");
       }, 1000);
     }
   }
@@ -221,10 +222,14 @@ export default {
 .editorBox {
   border-left: 1px solid rgb(212, 212, 212);
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
+    position: relative;
 }
 .editor {
   height: 100vh;
-
+  overflow-y: scroll;
+  width: 100%;
   ul {
     list-style: inherit !important;
   }
@@ -241,7 +246,7 @@ export default {
   opacity: 0;
   text-align: center;
   position: absolute;
-  right: 0;
+  left: 0;
   top: 5%;
   height: 90%;
   /*

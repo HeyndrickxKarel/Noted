@@ -1,7 +1,7 @@
 <template>
   <div class="NotePreview" v-on:click="setActiveNoteIndex">
     <p class="notename">{{note.content[0].content != undefined? note.content[0].content[0].text:"Nieuwe notitie" }}</p>
-    <p class="notecontent">{{note.content[1] != undefined ? note.content[1].content[0].text :  '...'}}</p>
+    <p class="notecontent">{{note.content[1] && note.content[1].content[0] ? note.content[1].content[0].text :  '...'}}</p>
     <p class="notedate">{{note.dateCreated | formatDate}}</p>
   </div>
 </template>
@@ -35,6 +35,8 @@ padding: 10px;
   }
   .notecontent {
     color: $almostdarkGray;
+    height: 46px; 
+    overflow-y: hidden;
   }
   .notedate {
     text-align: right;

@@ -104,6 +104,15 @@ export default new Vuex.Store({
       Vue.set(state.notes, state.notes.length, newNote)
       state.noteWasClicked = !state.noteWasClicked;
       state.activeNoteIndex = state.notes.length - 1;
+    },
+    saveNotes(state){
+      axios.put(baseURL+"update/"+state.user.uid,state.notes)
+      .then(function(){
+        console.log("notes updated backend");
+      })
+      .catch(function(){
+        console.log("error")
+      })
     }
   },
   actions: {
