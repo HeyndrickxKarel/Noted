@@ -73,13 +73,14 @@ export default new Vuex.Store({
    toggleNoteWasClicked(state){
     state.noteWasClicked = !state.noteWasClicked;
    },
-    updateActiveNote(state, newNote){
+    updateNote(state, params){
       console.log("");
       console.log("active node is")
       console.log(state.activeNoteIndex);
 
-      state.notes[state.activeNoteIndex] = newNote;
-      Vue.set(state.notes, state.activeNoteIndex, newNote)
+      console.log(params.index);
+      state.notes[params.index] = params.newNote;
+      Vue.set(state.notes, params.index, params.newNote)
 
 
       console.log("nieuwe active note")

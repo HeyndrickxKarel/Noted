@@ -206,10 +206,10 @@ export default {
         clearTimeout(this.timer);
         this.timer = undefined;
       }
-
+      var currentNoteIndex = this.$store.getters.activeNoteIndex;
       this.timer = setTimeout(() => {
         this.json.dateCreated = new Date();
-        this.$store.commit("updateActiveNote", newJson);
+        this.$store.commit("updateNote", {newNote: newJson,index: currentNoteIndex});
         this.$store.commit("saveNotes");
       }, 1000);
     }
