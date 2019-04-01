@@ -9,13 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: undefined,
-    notes: [],
+    notes: undefined,
     activePage: 'notes',
     statusMsg: {
       message: '',
       type: ''
     },
-    activeNoteIndex : undefined,
+    activeNoteIndex : 0,
     noteWasClicked: true
     
   },

@@ -102,6 +102,8 @@
 
 <script>
 import firebase from "firebase";
+import axios from "axios";
+const baseURL = "http://localhost:3000/API/noters/";
 
 export default {
   data() {
@@ -129,22 +131,36 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() =>
+        .then(response => {
+          //When registered, show a pop up that the account has been made in firebase
           this.$store.commit("setStatusMsg", {
             message: "Account werd aangemaakt!",
             type: "is-info"
-          })
-        )
+          });
+
+          //Afterwards, register the user in the noted backend
+          axios
+            .post(baseURL, {
+              firebaseUserId: response.user.uid
+            })
+            .then(receivedNotes => {
+
+              //If register succeed, put the received notes in the store
+              this.$store.commit("setNotes", receivedNotes.data.notes);
+              console.log("Account werd aangemaakt in backend");
+            })
+            .catch(() => {
+
+              //If register not succeed, say this
+              console.log("Kon account niet aanmaken in backend");
+            });
+        })
         .catch(error =>
           this.$store.commit("setStatusMsg", {
             message: error.message,
             type: "is-danger"
           })
         );
-
-      this.email = "";
-      this.password = "";
-      this.name = "";
     },
     logout() {
       firebase
@@ -167,6 +183,30 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
+        .then(reponse => {
+          //When logged in, show a pop up that the user has logged in
+          this.$store.commit("setStatusMsg", {
+            message: "Succesvol ingelogd!",
+            type: "is-info"
+          });
+
+          //Afterwards, receive the user his notes
+          axios
+            .get(baseURL + reponse.user.uid)
+            .then((receivedNotes) => {
+              console.log(receivedNotes);
+              //If load notes succeed, put the received notes in the store
+              this.$store.commit("setNotes", receivedNotes.data[0].notes);
+              console.log("Notes werden geladen van de backend");
+            })
+            .catch((error) => {
+
+              //If load notes note succeed, alert the user
+              console.log(error);
+              return error;
+            });
+          // this.$store.dispatch("loadNotes", this.$store.getters.user);
+        })
         .catch(error =>
           this.$store.commit("setStatusMsg", {
             message: error.message,
@@ -177,6 +217,14 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
+      console.log("onAuthStateChanged called");
+
+      //Reset login inputs when loading login page
+      //TODO:  uncomment this.email = "";
+      //this.email = "";
+      this.password = "";
+      this.name = "";
+
       this.$store.commit("setUser", user);
     });
   },

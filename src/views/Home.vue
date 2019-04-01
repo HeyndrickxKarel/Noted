@@ -24,7 +24,6 @@ export default {
   },
     mounted(){
     this.$store.commit("setActivePage", "home");
-    this.$store.dispatch("loadNotes", this.$store.getters.user);
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-          <div v-if="user">
+    <div v-if="user && notes">
       <div class="columns is-mobile">
         <div class="column is-narrow">
           <NavMenu/>
@@ -10,12 +10,13 @@
         </div>
       </div>
     </div>
-          <div v-if="!user">
+    <div v-if="!user || !notes">
       <Login/>
     </div>
-          <div class="statusbarContainer">
-        <Statusbar/>
-      </div>
+    <div class="statusbarContainer">
+      <button v-on:click="showInfo" class="button is-warning">Click me</button>
+      <Statusbar/>
+    </div>
   </div>
 </template>
 
@@ -36,6 +37,18 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user;
+    },
+    notes() {
+      return this.$store.getters.notes;
+    }
+  },
+  methods: {
+    showInfo() {
+      console.log(" ");
+      console.log("user:");
+      console.log(this.user);
+      console.log("notes:");
+      console.log(this.notes);
     }
   }
 };
@@ -45,7 +58,7 @@ export default {
 <style>
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css";
 
-html{
+html {
   overflow-y: hidden !important;
 }
 #app {
@@ -70,7 +83,7 @@ h3 {
   font-size: 1.25rem !important;
 }
 h1 {
-    margin-bottom: 40px !important;
+  margin-bottom: 40px !important;
 }
 
 code {
@@ -122,5 +135,4 @@ hr {
     opacity: 1;
   }
 }
-
 </style>

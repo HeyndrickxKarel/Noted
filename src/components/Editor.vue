@@ -192,6 +192,7 @@ export default {
   },
   mounted(){
     this.editor.setContent(this.$store.getters.activeNote);
+          this.$store.commit("toggleNoteWasClicked");
   },
   watch: {
     activeNote(newNote) {
