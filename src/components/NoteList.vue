@@ -22,14 +22,21 @@
     </div>
     <div class="scrollable noteListItems">
       <div class="dummyBox"></div>
-      <div
-        class="noteShort window"
-        v-for="(note,index) in filteredNotes"
-        :key="index"
-        :class="{ 'is-active-note': new Date(activeNote.dateCreated).getTime() == new Date(note.dateCreated).getTime() }"
+      <transition-group
+        name="noteListTransiton"
+        enter-active-class="animated bounceInDown"
+        leave-active-class="animated bounceOutUp"
       >
-        <NotePreview :note="note"/>
-      </div>
+        <div
+          class="noteShort window"
+          v-for="(note,index) in filteredNotes"
+          :key="index"
+          :class="{ 'is-active-note': new Date(activeNote.dateCreated).getTime() == new Date(note.dateCreated).getTime() }"
+          v-bind:style="{ 'z-index' : 10000 - index - 1 }"
+        >
+          <NotePreview :note="note"/>
+        </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -45,13 +52,13 @@ export default {
     clearSearch() {
       this.search = "";
     },
-    createNote(){
+    createNote() {
       this.$store.commit("createNote");
     }
   },
   data() {
     return {
-      search: "",
+      search: ""
     };
   },
   computed: {
@@ -61,7 +68,7 @@ export default {
     activeNoteIndex() {
       return this.$store.getters.activeNoteIndex;
     },
-    activeNote(){
+    activeNote() {
       return this.$store.getters.activeNote;
     },
     filteredNotes() {
@@ -111,6 +118,7 @@ export default {
   width: 100%;
   background-color: $backgroundColor;
   padding: 10px;
+  z-index: 10000;
 }
 .window {
   border-bottom: 1px solid rgb(212, 212, 212);
@@ -137,6 +145,8 @@ export default {
 .noteShort {
   transition: 0.2s;
   cursor: pointer;
+  background-color: $backgroundColor;
+  position: relative;
   &:hover {
     padding-left: 8px;
   }
