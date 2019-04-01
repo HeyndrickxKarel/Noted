@@ -261,19 +261,9 @@ export default {
 }
 
 .menubar__button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 17px;
-  color: #959595 !important;
-  font-weight: bold;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  margin: 0px 10px 0px 10px;
-  display: block;
-  height: 7%;
+    margin: 0px 10px 0px 10px;
+    display: block;
+    height: 7%;
 }
-.menubar__button:hover {
-  color: #de4b50 !important;
-}
+
 </style>

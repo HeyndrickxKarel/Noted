@@ -106,6 +106,16 @@ export default new Vuex.Store({
       state.noteWasClicked = !state.noteWasClicked;
       state.activeNoteIndex = state.notes.length - 1;
     },
+    deleteNote(state, note){
+      for(var i = 0; i < state.notes.length; i += 1) {
+        if(new Date(state.notes[i].dateCreated).getTime() == new Date(note.dateCreated).getTime()) {
+          console.log("note click status:")
+          console.log(state.noteWasClicked)
+          state.activeNoteIndex -= 1;
+          Vue.delete(state.notes,state.activeNoteIndex+1);
+        }
+    }
+    },
     saveNotes(state){
       axios.put(baseURL+"update/"+state.user.uid,state.notes)
       .then(function(){

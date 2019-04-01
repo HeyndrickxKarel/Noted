@@ -35,4 +35,17 @@ $menu-item-hover-color: $lightestGray;
     text-decoration: underline;
     text-decoration-color: $danger;
   }
-  
+  .menubar__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: $lightGray !important;
+    font-weight: bold;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+
+  }
+  .menubar__button:hover {
+    color: $danger !important;
+  }
