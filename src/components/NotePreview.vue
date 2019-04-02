@@ -27,7 +27,6 @@ export default {
   methods: {
     setActiveNoteIndex() {
       if (this.note != this.activeNote){
-        console.log("Note preview ook clicked");
       this.$store.commit("toggleNoteWasClicked");
       this.$store.commit("setActiveNoteIndexByNote", this.note);
       }

@@ -14,8 +14,10 @@
       <Login/>
     </div>
     <div class="statusbarContainer">
-      <button v-on:click="showInfo" class="button is-warning">Click me</button>
-      <Statusbar/>
+      <button v-on:click="showInfo" class="button is-warning">Click me</button>     
+      <transition-group name="fly-in">
+      <Statusbar v-for="statusMsg in statusMessages" :key="statusMsg" :statusMsg="statusMsg"/>
+      </transition-group> 
     </div>
   </div>
 </template>
@@ -40,6 +42,9 @@ export default {
     },
     notes() {
       return this.$store.getters.notes;
+    },
+    statusMessages(){
+      return this.$store.getters.statusMessages;
     }
   },
   methods: {

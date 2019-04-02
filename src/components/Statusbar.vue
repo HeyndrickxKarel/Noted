@@ -16,14 +16,14 @@
 
 <script>
 export default {
-  computed: {
-    statusMsg() {
-      return this.$store.getters.statusMsg;
+   props: {
+    statusMsg: {
+      type: Object
     }
   },
   methods: {
     discardStatusMsg() {
-      this.$store.commit("discardStatusMsg");
+      this.$store.commit("discardStatusMsg",this.statusMsg);
     }
   }
 };
@@ -32,6 +32,7 @@ export default {
 <style>
 .notification{
   z-index: 20000;
+  margin-top: 20px;
 }
 
 </style>

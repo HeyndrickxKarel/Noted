@@ -15,6 +15,7 @@ export default new Vuex.Store({
       message: '',
       type: ''
     },
+    statusMessages: [],
     activeNoteIndex : 0,
     noteWasClicked: true
     
@@ -29,22 +30,22 @@ export default new Vuex.Store({
     setActivePage(state, page) {
       state.activePage = page
     },
-    setStatusMsg(state, statusMsg) {
-      state.statusMsg = statusMsg
+    addStatusMsg(state,statusMsg){      
+      state.statusMessages.push(statusMsg);
       setTimeout(() => {
-        state.statusMsg = {
-         message: '',
-          type: ''
-        }
-      }, 4000)
+        let index = state.statusMessages.indexOf(statusMsg);
+        if (index >= 0){
+          state.statusMessages.splice(index, 1);
+        }      
+      }, 7000)
+    },
+    discardStatusMsg(state, statusMsg){
+      let index = state.statusMessages.indexOf(statusMsg);
+      if (index >= 0){
+        state.statusMessages.splice(index, 1);
+      }  
+    },
 
-    },
-    discardStatusMsg(state) {
-      state.statusMsg = {
-        message: '',
-        type: ''
-      };
-    },
     receiveLoadedNotes(state, notes) {
       state.notes = notes;
       if (state.notes.length > 0){
@@ -149,6 +150,9 @@ export default new Vuex.Store({
     },
     statusMsg(state) {
       return state.statusMsg
+    },
+    statusMessages(state){
+      return state.statusMessages;
     },
     activeNote(state){
       return state.notes[state.activeNoteIndex];

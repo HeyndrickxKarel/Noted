@@ -45,7 +45,7 @@
               <transition name="fly-in">
                 <div
                   v-if="errors.has('email')"
-                  class="notification is-warning is-danger"
+                  class="notification is-warning is-warning"
                 >Gelieve een geldig e-mailadres in te geven</div>
               </transition>
             </div>
@@ -65,7 +65,7 @@
               <transition name="fly-in">
                 <div
                   v-if="errors.has('password')"
-                  class="notification is-warning is-danger"
+                  class="notification is-warning"
                 >{{actionIsLogin? "Gelieve uw wachtwoord in te geven":"Gelieve een wachtwoord in te geven groter als 6 karaters"}}</div>
               </transition>
             </div>
@@ -83,7 +83,7 @@
                 <transition name="fly-in">
                   <div
                     v-if="errors.has('password_confirmation')"
-                    class="notification is-danger"
+                    class="notification is-warning"
                   >Dit wachtwoord komt niet overeen met het bovenstaande</div>
                 </transition>
               </div>
@@ -133,9 +133,9 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(response => {
           //When registered, show a pop up that the account has been made in firebase
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: "Account werd aangemaakt!",
-            type: "is-info"
+            type: "is-link"
           });
 
           //Afterwards, register the user in the noted backend
@@ -156,9 +156,9 @@ export default {
             });
         })
         .catch(error =>
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: error.message,
-            type: "is-danger"
+            type: "is-warning"
           })
         );
     },
@@ -167,15 +167,15 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: "Tot later!",
-            type: "is-info"
+            type: "is-link"
           });
         })
         .catch(error =>
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: error.message,
-            type: "is-danger"
+            type: "is-warning"
           })
         );
     },
@@ -185,9 +185,9 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(reponse => {
           //When logged in, show a pop up that the user has logged in
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: "Succesvol ingelogd!",
-            type: "is-info"
+            type: "is-link"
           });
 
           //Afterwards, receive the user his notes
@@ -208,9 +208,9 @@ export default {
           // this.$store.dispatch("loadNotes", this.$store.getters.user);
         })
         .catch(error =>
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: error.message,
-            type: "is-danger"
+            type: "is-warning"
           })
         );
     }

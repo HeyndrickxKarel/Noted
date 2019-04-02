@@ -30,16 +30,16 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: "Succesvol uitgelogd!",
-            type: "is-info"
+            type: "is-link"
           });
           this.$router.push("/");
         })
         .catch(error =>
-          this.$store.commit("setStatusMsg", {
+          this.$store.commit("addStatusMsg", {
             message: error.message,
-            type: "is-danger"
+            type: "is-warning"
           })
         );
     }
