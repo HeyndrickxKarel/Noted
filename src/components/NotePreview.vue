@@ -5,7 +5,7 @@
       class="menubar__button noteDeleteIcon"
        v-on:click.stop="deleteNote"
     >
-      <font-awesome-icon :icon="['far','trash-alt']"/>
+      <font-awesome-icon :icon="['far','trash-alt']" class="large-icon"/>
     </button>
     <p
       class="notename"

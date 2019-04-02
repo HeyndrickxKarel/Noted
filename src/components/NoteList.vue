@@ -16,7 +16,7 @@
           </p>
         </div>
         <div class="column is-narrow newItem" v-on:click="createNote">
-          <font-awesome-icon icon="edit" class="dark-icon large-icon"/>
+          <font-awesome-icon icon="edit" class="dark-icon large-icon scaleOnHover"/>
         </div>
       </div>
     </div>

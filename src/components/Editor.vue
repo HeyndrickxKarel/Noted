@@ -2,6 +2,7 @@
     <template>
   <div>
     <div class="editorBox">
+      <div class="hoverContainer">
       <editor-menu-bar :editor="editor">
         <div
           class="menubar"
@@ -13,19 +14,19 @@
             :class="{ 'is-active': isActive.heading({ level: 1 }) }"
             @click="commands.heading({ level: 1 })"
           >H1</button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 2 }) }"
             @click="commands.heading({ level: 2 })"
           >H2</button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 3 }) }"
             @click="commands.heading({ level: 3 })"
           >H3</button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bold() }"
@@ -33,7 +34,7 @@
           >
             <font-awesome-icon icon="bold"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.italic() }"
@@ -41,7 +42,7 @@
           >
             <font-awesome-icon icon="italic"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.strike() }"
@@ -49,7 +50,7 @@
           >
             <font-awesome-icon icon="strikethrough"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.underline() }"
@@ -57,7 +58,7 @@
           >
             <font-awesome-icon icon="underline"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.paragraph() }"
@@ -65,7 +66,7 @@
           >
             <font-awesome-icon icon="paragraph"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bullet_list() }"
@@ -73,7 +74,7 @@
           >
             <font-awesome-icon icon="list-ul"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.ordered_list() }"
@@ -81,7 +82,7 @@
           >
             <font-awesome-icon icon="list-ol"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.blockquote() }"
@@ -89,11 +90,11 @@
           >
             <font-awesome-icon icon="quote-right"/>
           </button>
-          
+
           <button class="menubar__button" @click="commands.horizontal_rule">
             <font-awesome-icon icon="minus"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.code() }"
@@ -101,7 +102,7 @@
           >
             <font-awesome-icon icon="code"/>
           </button>
-          
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.code_block() }"
@@ -111,6 +112,7 @@
           </button>
         </div>
       </editor-menu-bar>
+      </div>
       <editor-content class="editor__content editor" :editor="editor"/>
     </div>
   </div>
@@ -190,9 +192,9 @@ export default {
       return this.$store.getters.activeNote;
     }
   },
-  mounted(){
+  mounted() {
     this.editor.setContent(this.$store.getters.activeNote);
-          this.$store.commit("toggleNoteWasClicked");
+    this.$store.commit("toggleNoteWasClicked");
   },
   watch: {
     activeNote(newNote) {
@@ -210,7 +212,10 @@ export default {
       var currentNoteIndex = this.$store.getters.activeNoteIndex;
       this.timer = setTimeout(() => {
         this.json.dateCreated = new Date();
-        this.$store.commit("updateNote", {newNote: newJson,index: currentNoteIndex});
+        this.$store.commit("updateNote", {
+          newNote: newJson,
+          index: currentNoteIndex
+        });
         this.$store.commit("saveNotes");
       }, 1000);
     }
@@ -225,7 +230,7 @@ export default {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-    position: relative;
+  position: relative;
 }
 .editor {
   height: 100vh;
@@ -240,30 +245,33 @@ export default {
   outline: none;
   padding: 6%;
 }
-.menubar {
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  padding-top: 20px;
-  opacity: 0;
-  text-align: center;
+.hoverContainer{
+  width: fit-content;
+  max-width: 80%;
+  margin: 0 auto;
+  &:hover .menubar{
+        transform: translateY(0px);
+  }
   position: absolute;
-  left: 0;
-  top: 5%;
-  height: 90%;
-  /*
-    border: 1px solid #979797;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
-    */
+    left: 10%;
+    height: 50px;
+
 }
-.menubar:hover {
-  opacity: 1;
+.menubar {
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    text-align: center;
+    overflow-y: hidden;
+    background-color: #353841;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: translateY(-200px);
+    padding: 0px 20px;
+    cursor: pointer;
 }
+
 
 .menubar__button {
-    margin: 0px 10px 0px 10px;
-    display: block;
-    height: 7%;
+  margin: 10px;
 }
-
 </style>

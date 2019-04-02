@@ -17,7 +17,7 @@ $menu-item-hover-color: $lightestGray;
     color: $danger
 }
 .large-icon{
-    font-size: 20px;
+    font-size: 18px;
 }
 .columns {
     margin-top: 0px !important;
@@ -42,10 +42,11 @@ $menu-item-hover-color: $lightestGray;
     font-size: 17px;
     color: $lightGray !important;
     font-weight: bold;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
 
   }
-  .menubar__button:hover {
+  .menubar__button:hover, .scaleOnHover:hover{
     color: $danger !important;
+    transform: scale(1.2);
   }
