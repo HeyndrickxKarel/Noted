@@ -15,7 +15,7 @@ export default new Vuex.Store({
       message: '',
       type: ''
     },
-    statusMessages: [],
+    statusMessages:[],
     activeNoteIndex : 0,
     noteWasClicked: true
     

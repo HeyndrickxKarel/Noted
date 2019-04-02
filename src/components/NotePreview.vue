@@ -3,9 +3,16 @@
     <button
       :class="{ 'is-visible':  new Date(activeNote.dateCreated).getTime() == new Date(note.dateCreated).getTime()}"
       class="menubar__button noteDeleteIcon"
-       v-on:click.stop="deleteNote"
+      v-on:click.stop="deleteNote"
     >
       <font-awesome-icon :icon="['far','trash-alt']" class="large-icon"/>
+    </button>
+    <button
+      v-print="'#editorContent'"
+      :class="{ 'is-visible':  new Date(activeNote.dateCreated).getTime() == new Date(note.dateCreated).getTime()}"
+      class="printButton scaleOnHover"
+    >
+      <font-awesome-icon icon="print"/>
     </button>
     <p
       class="notename"
@@ -26,14 +33,13 @@ export default {
   },
   methods: {
     setActiveNoteIndex() {
-      if (this.note != this.activeNote){
-      this.$store.commit("toggleNoteWasClicked");
-      this.$store.commit("setActiveNoteIndexByNote", this.note);
+      if (this.note != this.activeNote) {
+        this.$store.commit("toggleNoteWasClicked");
+        this.$store.commit("setActiveNoteIndexByNote", this.note);
       }
-
     },
-    deleteNote(event){
-      this.$store.commit("toggleNoteWasClicked")
+    deleteNote(event) {
+      this.$store.commit("toggleNoteWasClicked");
       this.$store.commit("deleteNote", this.note);
       this.$store.commit("saveNotes");
       event.preventDefault();
@@ -41,7 +47,7 @@ export default {
     }
   },
   computed: {
-    activeNote(){
+    activeNote() {
       return this.$store.getters.activeNote;
     }
   }
@@ -66,15 +72,36 @@ export default {
     text-align: right;
     color: $lightGray;
   }
-  .noteDeleteIcon{
-    float:right; 
+  .noteDeleteIcon {
+    float: right;
     opacity: 0;
-    transition: 0.4s;
+    transition: 0.2s;
     pointer-events: none;
   }
-  .noteDeleteIcon.is-visible{
+  .noteDeleteIcon.is-visible {
     pointer-events: inherit;
     opacity: 1;
   }
+}
+.printButton {
+  border: none;
+  background: none;
+  font-size: inherit;
+  color: $lightGray;
+  float: right;
+  margin: 0 auto;
+  height: 40px;
+  pointer-events: none;
+  cursor: pointer;
+  opacity: 0;
+  width: 40px;
+  transition: 0.2s;
+}
+.printButton.is-visible {
+  pointer-events: inherit;
+  opacity: 1;
+}
+.printButton:focus{
+  outline: none;
 }
 </style>

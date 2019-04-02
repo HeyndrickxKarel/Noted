@@ -12,6 +12,9 @@
           </router-link>
         </li>
       </ul>
+      <p class="menu-label">Acties</p>
+      <ul class="menu-list">
+      </ul>
       <p class="menu-label">Andere</p>
       <ul class="menu-list">
         <li>
@@ -21,6 +24,7 @@
           <router-link to="/logout" :class="{ 'is-active': isActive('logout') }">Log uit</router-link>
         </li>
       </ul>
+      
     </aside>
   </div>
 </template>

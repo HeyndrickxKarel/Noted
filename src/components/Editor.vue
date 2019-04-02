@@ -124,7 +124,7 @@
         </editor-menu-bar>
         <div class="toolsIndicator"></div>
       </div>
-      <editor-content class="editor__content editor" :editor="editor"/>
+      <editor-content class="editor__content editor" id="editorContent" :editor="editor"/>
     </div>
   </div>
 </template>
@@ -264,6 +264,14 @@ export default {
   ul {
     list-style: inherit !important;
   }
+  
+}
+@media only print {
+   .editor {
+     width: auto;
+     height: auto;
+     overflow: visible;
+   }
 }
 .editor > div {
   height: 100vh;
