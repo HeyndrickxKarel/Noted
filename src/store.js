@@ -33,7 +33,7 @@ export default new Vuex.Store({
       state.statusMsg = statusMsg
       setTimeout(() => {
         state.statusMsg = {
-          message: '',
+         message: '',
           type: ''
         }
       }, 4000)

@@ -34,19 +34,41 @@ $menu-item-hover-color: $lightestGray;
 .red-underline{
     text-decoration: underline;
     text-decoration-color: $danger;
-  }
-  .menubar__button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 17px;
-    color: $lightGray !important;
-    font-weight: bold;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
+}
+.menubar__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: $lightGray !important;
+  font-weight: bold;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.menubar__button:hover, .scaleOnHover:hover{
+  color: $danger !important;
+  transform: scale(1.2);
+}
+.editor ul{
+  list-style-type: disc;
 
-  }
-  .menubar__button:hover, .scaleOnHover:hover{
-    color: $danger !important;
-    transform: scale(1.2);
-  }
+}
+.editor ol, .editor ul{
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px
+}
+.editor__content li>ol, .editor__content li>p, .editor__content li>ul {
+  margin: 0;
+}
+
+blockquote:last-child, h1:last-child, h2:last-child, h3:last-child, ol:last-child, p:last-child, pre:last-child, ul:last-child {
+  margin-bottom: 0;
+}
+.shadow {
+  -webkit-box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.2);
+}

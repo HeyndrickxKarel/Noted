@@ -2,7 +2,7 @@
   <div>
     <transition name="fly-in">
       <div
-        class="notification statusbar"
+        class="notification shadow"
         :class="statusMsg.type"
         v-if="statusMsg.message.length > 0"
       >
@@ -30,9 +30,8 @@ export default {
 </script>
 
 <style>
-.statusbar {
-  -webkit-box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.2);
+.notification{
+  z-index: 20000;
 }
 
 </style>

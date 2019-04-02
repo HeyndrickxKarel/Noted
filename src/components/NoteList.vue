@@ -3,11 +3,11 @@
     <div class="window searchBar">
       <div class="columns is-mobile topContainer">
         <div class="column">
-          <p class="control has-icons-left has-icons-right searchBox">
-            <span class="icon is-small is-left">
-              <font-awesome-icon icon="search" class="dark-icon fa"/>
-            </span>
-            <input class="input" type="text" placeholder="Zoek naar een notitie" v-model="search">
+          <div class="searchButton" @click="focusSearchBar">
+              <font-awesome-icon icon="search" class="dark-icon fa scaleOnHover" style="float:left;"/>
+          </div>
+          <p class="control has-icons-right has-icons-left searchBox">
+            <input class="input" ref="searchInput" type="text" placeholder="Zoek naar een notitie" v-model="search">
             <transition name="fly-in">
               <span class="icon is-small is-right" v-if="search.length > 0">
                 <button class="is-right delete" v-on:click="clearSearch"></button>
@@ -54,6 +54,9 @@ export default {
     },
     createNote() {
       this.$store.commit("createNote");
+    },
+    focusSearchBar(){
+      this.$refs.searchInput.focus();
     }
   },
   data() {
@@ -119,6 +122,11 @@ export default {
   background-color: $backgroundColor;
   padding: 10px;
   z-index: 10000;
+}
+.searchButton{
+  position: absolute;
+    top: 50%;
+    transform: translateY(-30%);
 }
 .window {
   border-bottom: 1px solid rgb(212, 212, 212);
