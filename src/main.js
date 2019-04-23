@@ -11,6 +11,7 @@ import firebaseInit from './firebaseInit'
 import firebaseConfig from './firebaseConfig'
 import VeeValidate from 'vee-validate';
 import Print from 'vue-print-nb'
+import ToggleButton from 'vue-js-toggle-button'
 
 library.add(faSearch,faEdit, faBold, faItalic, faCode, faParagraph, faListUl, faListOl, faExpand, faStrikethrough, faUnderline, faQuoteRight, faMinus, faLock, faEnvelope, faTimesCircle, faTrashAlt, faTasks, faPrint)
 
@@ -18,6 +19,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
  
 Vue.use(Print);
 Vue.use(VeeValidate);
+Vue.use(ToggleButton);
+
 Vue.config.productionTip = false
 
 require("./assets/main.scss")

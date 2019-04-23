@@ -18,7 +18,11 @@ export default new Vuex.Store({
     },
     statusMessages:[],
     activeNoteIndex : 0,
-    noteWasClicked: true
+    noteWasClicked: true,
+    userSettings: {
+      darkMode: true,
+      largeFont: true
+    }
     
   },
   mutations: {
@@ -126,6 +130,9 @@ export default new Vuex.Store({
       .catch(function(){
         console.log("error")
       })
+    },
+    updateUserSettings(state, params){
+      state.userSettings[params.setting] = params.settingValue
     }
   },
   actions: {
@@ -167,6 +174,9 @@ export default new Vuex.Store({
     },
     activeNoteIndex(state){
       return state.activeNoteIndex;
+    },
+    userSettings(state){
+      return state.userSettings;
     }
   }
 })
