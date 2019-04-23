@@ -31,8 +31,8 @@ export default {
 
 <style>
 .notification{
-  z-index: 20000;
   margin-top: 20px;
+  word-break: break-all;
 }
 
 </style>

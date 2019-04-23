@@ -5,8 +5,8 @@
       <div class="hoverContainer">
         <editor-menu-bar :editor="editor">
           <div
-            class="menubar shadow"
-            :class="{ 'is-shown': focused, 'is-not-shown': !focused }"
+            class="menubar"
+            :class="{ 'is-shown': focused, 'is-not-shown': !focused, 'shadow':focused }"
             slot-scope="{ commands, isActive, focused }"
           >
             <button
@@ -276,7 +276,7 @@ export default {
 .editor > div {
   height: 100vh;
   outline: none;
-  padding: 6%;
+padding: calc(0vw + 50px);
 }
 .hoverContainer {
   width: fit-content;
@@ -286,11 +286,13 @@ export default {
     transform: translateY(0px);
   }
   position: absolute;
-  left: 10%;
-  height: 20px;
+  left: 50%;
+  height: 20px;  
+  transform: translateX(-50%);
 
   .toolsIndicator {
-    width: 250px;
+    max-width: 250px;
+    width: 60%;
     height: 5px;
     border-radius: 20px;
     background-color: $darkbluefade;
@@ -311,7 +313,7 @@ export default {
   background-color: $darkblue;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  transform: translateY(-200px);
+  transform: translateY(-120%);
   padding: 0px 20px;
   cursor: pointer;
   position: relative;

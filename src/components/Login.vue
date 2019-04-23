@@ -90,7 +90,7 @@
             </transition>
             <div class="field">
               <p class="control has-text-right">
-                <button type="submit" class="button is-link is-rounded">Let's go!</button>
+                <button type="submit" class="button loginButton is-link is-rounded">Let's go!</button>
               </p>
             </div>
           </form>
@@ -103,7 +103,8 @@
 <script>
 import firebase from "firebase";
 import axios from "axios";
-const baseURL = "http://localhost:3000/API/noters/";
+var baseURL = "http://localhost:3000/API/noters/";
+baseURL = "https://noted-backend.herokuapp.com/API/noters/";
 
 export default {
   data() {
@@ -144,15 +145,11 @@ export default {
               firebaseUserId: response.user.uid
             })
             .then(receivedNotes => {
-
               //If register succeed, put the received notes in the store
               this.$store.commit("setNotes", receivedNotes.data.notes);
-              console.log("Account werd aangemaakt in backend");
             })
             .catch(() => {
-
               //If register not succeed, say this
-              console.log("Kon account niet aanmaken in backend");
             });
         })
         .catch(error =>
@@ -184,28 +181,17 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(reponse => {
-          //When logged in, show a pop up that the user has logged in
-          this.$store.commit("addStatusMsg", {
-            message: "Succesvol ingelogd!",
-            type: "is-link"
-          });
 
-          //Afterwards, receive the user his notes
+          //After loggin in into firebase, receive the user his notes
           axios
             .get(baseURL + reponse.user.uid)
-            .then((receivedNotes) => {
-              console.log(receivedNotes);
+            .then(receivedNotes => {
               //If load notes succeed, put the received notes in the store
               this.$store.commit("setNotes", receivedNotes.data[0].notes);
-              console.log("Notes werden geladen van de backend");
             })
-            .catch((error) => {
-
-              //If load notes note succeed, alert the user
-              console.log(error);
+            .catch(error => {
               return error;
             });
-          // this.$store.dispatch("loadNotes", this.$store.getters.user);
         })
         .catch(error =>
           this.$store.commit("addStatusMsg", {
@@ -217,8 +203,6 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
-      console.log("onAuthStateChanged called");
-
       //Reset login inputs when loading login page
       //TODO:  uncomment this.email = "";
       //this.email = "";
@@ -314,6 +298,17 @@ export default {
       input::placeholder {
         color: $lightGray;
       }
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus {
+        border: none !important;
+        border-bottom: 1px solid #b3b3b3 !important;     
+        -webkit-text-fill-color: $lightGray;
+        box-shadow: 0 0 0px 1000px $darkblue inset;
+        -webkit-box-shadow: 0 0 0px 1000px $darkblue inset;
+        transition: background-color 5000s ease-in-out 0s;
+   
+      }
       .loginHeader {
         .column {
           padding-right: 20px !important;
@@ -324,5 +319,9 @@ export default {
       }
     }
   }
+}
+.loginButton {
+  line-height: 0px !important;
+  padding: 25px 30px !important;
 }
 </style>

@@ -15,7 +15,7 @@
       <p class="menu-label">Andere</p>
       <ul class="menu-list">
         <li>
-          <router-link to="/about" :class="{ 'is-active': isActive('about') }">Info</router-link>
+          <router-link to="/settings" :class="{ 'is-active': isActive('settings') }">Instellingen</router-link>
         </li>
          <li>
           <router-link to="/logout" :class="{ 'is-active': isActive('logout') }">Log uit</router-link>

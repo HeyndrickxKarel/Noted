@@ -16,7 +16,7 @@
     <div class="statusbarContainer">
       <button v-on:click="showInfo" class="button is-warning">Click me</button>     
       <transition-group name="fly-in">
-      <Statusbar v-for="statusMsg in statusMessages" :key="statusMsg" :statusMsg="statusMsg"/>
+      <Statusbar v-for="statusMsg in statusMessages" :key="statusMsg.message" :statusMsg="statusMsg"/>
       </transition-group> 
     </div>
   </div>
@@ -45,15 +45,22 @@ export default {
     },
     statusMessages(){
       return this.$store.getters.statusMessages;
-    }
+    },
+    activeNoteIndex(){
+      return this.$store.getters.activeNoteIndex;
+    },
   },
   methods: {
     showInfo() {
-      console.log(" ");
-      console.log("user:");
-      console.log(this.user);
-      console.log("notes:");
-      console.log(this.notes);
+       this.$store.commit("addStatusMsg", {
+            message: 'user:'+ JSON.stringify(this.user),
+            type: "is-warning"
+          });
+
+              this.$store.commit("addStatusMsg", {
+            message: 'activeNoteIndex:'+ this.activeNoteIndex,
+            type: "is-warning"
+          });
     }
   }
 };
@@ -115,6 +122,7 @@ hr {
   width: 80%;
   bottom: 10px;
   left: 10%;
+  z-index: 20000;
 }
 
 .fly-in {

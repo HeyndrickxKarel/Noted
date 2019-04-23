@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const baseURL = "http://localhost:3000/API/noters/";
+var baseURL = "http://localhost:3000/API/noters/";
+baseURL = "https://noted-backend.herokuapp.com/API/noters/";
 
 Vue.use(Vuex)
 

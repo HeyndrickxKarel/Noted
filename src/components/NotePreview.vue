@@ -36,6 +36,7 @@ export default {
       if (this.note != this.activeNote) {
         this.$store.commit("toggleNoteWasClicked");
         this.$store.commit("setActiveNoteIndexByNote", this.note);
+        //let offsetFromTopList = this.$el.offsetParent.offsetTop;
       }
     },
     deleteNote(event) {
@@ -77,6 +78,7 @@ export default {
     opacity: 0;
     transition: 0.2s;
     pointer-events: none;
+    margin: 10px 5px;
   }
   .noteDeleteIcon.is-visible {
     pointer-events: inherit;
@@ -101,7 +103,7 @@ export default {
   pointer-events: inherit;
   opacity: 1;
 }
-.printButton:focus{
+.printButton:focus, .noteDeleteIcon:focus{
   outline: none;
 }
 </style>
