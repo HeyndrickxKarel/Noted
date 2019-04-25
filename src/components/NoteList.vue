@@ -34,7 +34,7 @@
           :class="{ 'is-active-note': new Date(activeNote.dateCreated).getTime() == new Date(note.dateCreated).getTime() }"
           v-bind:style="{ 'z-index' : 10000 - index - 1 }"
         >
-          <NotePreview :note="note"/>
+          <NotePreview :note="note" :notesCount="notes.length"/>
         </div>
       </transition-group>
     </div>

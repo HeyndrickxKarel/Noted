@@ -7,7 +7,7 @@
           <hr>
           <div class="columns is-desktop">
             <div class="column">
-              <h4 class="subtitle is-5">Dark mode</h4>
+              <h4 class="subtitle">Dark mode</h4>
               <p>Yet to be implemented</p>
               <toggle-button
                 @change="toggleDarkMode"
@@ -18,7 +18,7 @@
               />
             </div>
             <div class="column">
-              <h4 class="subtitle is-5">Large font</h4>
+              <h4 class="subtitle">Large font</h4>
                             <p>Yet to be implemented</p>
               <toggle-button
                 @change="toggleLargeFont"

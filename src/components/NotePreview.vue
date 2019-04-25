@@ -29,7 +29,8 @@ export default {
   props: {
     note: {
       type: Object
-    }
+    },
+    notesCount: Number
   },
   methods: {
     setActiveNoteIndex() {
@@ -40,11 +41,15 @@ export default {
       }
     },
     deleteNote(event) {
+      if (this.notesCount > 1){
       this.$store.commit("toggleNoteWasClicked");
       this.$store.commit("deleteNote", this.note);
       this.$store.commit("saveNotes");
       event.preventDefault();
-      return false;
+            return false;
+
+      }
+     
     }
   },
   computed: {
