@@ -7,7 +7,7 @@
               <font-awesome-icon icon="search" class="dark-icon fa scaleOnHover" style="float:left;"/>
           </div>
           <p class="control has-icons-right has-icons-left searchBox">
-            <input class="input" ref="searchInput" type="text" placeholder="Zoek naar een notitie" v-model="search">
+            <input class="input" ref="searchInput" type="text" placeholder="Search for a note" v-model="search">
             <transition name="fly-in">
               <span class="icon is-small is-right" v-if="search.length > 0">
                 <button class="is-right delete" v-on:click="clearSearch"></button>
@@ -119,7 +119,7 @@ export default {
   height: 70px;
   position: absolute;
   width: 100%;
-  background-color: $backgroundColor;
+  background-color: var(--mainBackgroundColor);
   padding: 10px;
   z-index: 10000;
 }
@@ -129,7 +129,7 @@ export default {
     transform: translateY(-30%);
 }
 .window {
-  border-bottom: 1px solid rgb(212, 212, 212);
+  border-bottom: 1px solid var(--borderColor);
 }
 .newItem {
   margin: 6px 10px 6px 20px;
@@ -145,6 +145,10 @@ export default {
     background-color: transparent;
     box-shadow: none;
     border-radius: 0px;
+    color:var(--mainFontColor);
+    &::placeholder{
+      color:var(--mainFontColor);
+    }
   }
   .fa {
     cursor: pointer;
@@ -153,16 +157,16 @@ export default {
 .noteShort {
   transition: 0.2s;
   cursor: pointer;
-  background-color: $backgroundColor;
+  background-color: var(--mainBackgroundColor);
   position: relative;
   &:hover {
     padding-left: 8px;
   }
-  border-left: 0px solid $danger;
+  border-left: 0px solid var(--danger);
 }
 
 .is-active-note {
-  border-left: 8px solid $danger !important;
+  border-left: 8px solid var(--danger) !important;
   padding-left: 0px !important;
 }
 </style>

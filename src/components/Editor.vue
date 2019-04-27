@@ -124,7 +124,7 @@
         </editor-menu-bar>
         <div class="toolsIndicator"></div>
       </div>
-      <editor-content class="editor__content editor" id="editorContent" :editor="editor"/>
+      <editor-content class="editor__content editor" id="editorContent" ref="editorContent" :editor="editor"/>
     </div>
   </div>
 </template>
@@ -213,6 +213,10 @@ export default {
     this.editor.setContent(this.$store.getters.activeNote);
     this.$store.commit("toggleNoteWasClicked");
   },
+  created(){
+        console.log(this.$refs.editorContent);
+    console.log(this.$el.children[0].children[1]);
+  },
   beforeDestroy() {
     this.editor.destroy();
   },
@@ -251,7 +255,7 @@ export default {
 @import "../assets/variables.scss";
 
 .editorBox {
-  border-left: 1px solid rgb(212, 212, 212);
+  border-left: 1px solid var(--borderColor);
   height: 100vh;
   width: 100%;
   overflow: hidden;
@@ -295,7 +299,7 @@ padding: calc(0vw + 50px);
     width: 60%;
     height: 5px;
     border-radius: 20px;
-    background-color: $darkbluefade;
+    background-color: var(--toolsIndicatorBackgroundColor);
     margin: 0 auto;
     position: absolute;
     top: 10px;
@@ -310,7 +314,7 @@ padding: calc(0vw + 50px);
   transition: 0.4s;
   text-align: center;
   overflow-y: hidden;
-  background-color: $darkblue;
+  background-color: var(--darkblue);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   transform: translateY(-120%);

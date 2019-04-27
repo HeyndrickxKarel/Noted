@@ -20,8 +20,9 @@ export default new Vuex.Store({
     activeNoteIndex : 0,
     noteWasClicked: true,
     userSettings: {
-      darkMode: true,
-      largeFont: true
+      darkMode: false,
+      largeFont: false,
+      spellingCheck: false
     }
     
   },

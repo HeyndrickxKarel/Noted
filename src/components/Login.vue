@@ -19,7 +19,7 @@
               </h1>
             </div>
             <div class="column is-narrow">
-              <h2 class="title darkGray of">of</h2>
+              <h2 class="title darkGray of">or</h2>
             </div>
             <div class="column is-narrow">
               <h1 class="title">
@@ -32,7 +32,7 @@
           </div>
           <form @submit.prevent="submit">
             <div class="field">
-              <label class="label">E-mailadres</label>
+              <label class="label">E-mail</label>
               <input
                 type="email"
                 class="input"
@@ -46,11 +46,11 @@
                 <div
                   v-if="errors.has('email')"
                   class="notification is-warning is-warning"
-                >Gelieve een geldig e-mailadres in te geven</div>
+                >Please enter a valid email</div>
               </transition>
             </div>
             <div class="field">
-              <label class="label">Wachtwoord</label>
+              <label class="label">Password</label>
               <input
                 type="password"
                 class="input"
@@ -71,7 +71,7 @@
             </div>
             <transition name="fly-in">
               <div class="field" v-if="!actionIsLogin">
-                <label class="label">Herhaal wachtwoord</label>
+                <label class="label">Repeat password</label>
                 <input
                   type="password"
                   class="input"
@@ -84,7 +84,7 @@
                   <div
                     v-if="errors.has('password_confirmation')"
                     class="notification is-warning"
-                  >Dit wachtwoord komt niet overeen met het bovenstaande</div>
+                  >This password does not match the above</div>
                 </transition>
               </div>
             </transition>
@@ -135,7 +135,7 @@ export default {
         .then(response => {
           //When registered, show a pop up that the account has been made in firebase
           this.$store.commit("addStatusMsg", {
-            message: "Account werd aangemaakt!",
+            message: "Account was made!",
             type: "is-link"
           });
 
@@ -165,7 +165,7 @@ export default {
         .signOut()
         .then(() => {
           this.$store.commit("addStatusMsg", {
-            message: "Tot later!",
+            message: "See you later!",
             type: "is-link"
           });
         })
@@ -181,7 +181,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(reponse => {
-
           //After loggin in into firebase, receive the user his notes
           axios
             .get(baseURL + reponse.user.uid)
@@ -231,7 +230,7 @@ export default {
   height: 100vh;
 
   .banner {
-    background-color: $danger;
+    background-color: var(--danger);
     height: 100%;
     width: 50%;
     float: left;
@@ -245,12 +244,13 @@ export default {
       text-align: center;
       width: 70%;
       h1 {
-        color: $lightestGray;
+        color: var(--lightestGray) !important;
+        font-size: 2em !important;
       }
     }
   }
   .loginContainer {
-    background-color: $darkblue;
+    background-color: var(--darkblue);
     height: 100%;
     width: 50%;
     float: left;
@@ -264,16 +264,18 @@ export default {
       width: 70%;
       h1,
       label {
-        color: $lightestGray;
+        color: var(--lightestGray);
       }
       h1 {
+        font-size: 2em !important;
         a {
-          color: $lightestGray;
+          color: var(--lightestGray);
+          font-size: 1em !important;
           transition: 0.2s;
           &:hover {
-            color: $danger !important;
+            color: var(--danger) !important;
             text-decoration: underline;
-            text-decoration-color: $danger;
+            text-decoration-color: var(--danger);
           }
         }
       }
@@ -285,7 +287,7 @@ export default {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid #b3b3b3 !important;
-        color: $lightGray;
+        color: var(--lightGray);
         max-width: 100%;
         width: 100%;
         -webkit-box-shadow: none;
@@ -296,18 +298,17 @@ export default {
         border-radius: 0px;
       }
       input::placeholder {
-        color: $lightGray;
+        color: var(--lightGray);
       }
       input:-webkit-autofill,
       input:-webkit-autofill:hover,
       input:-webkit-autofill:focus {
         border: none !important;
-        border-bottom: 1px solid #b3b3b3 !important;     
-        -webkit-text-fill-color: $lightGray;
-        box-shadow: 0 0 0px 1000px $darkblue inset;
-        -webkit-box-shadow: 0 0 0px 1000px $darkblue inset;
+        border-bottom: 1px solid #b3b3b3 !important;
+        -webkit-text-fill-color: var(--lightGray);
+        box-shadow: 0 0 0px 1000px var(--darkblue) inset;
+        -webkit-box-shadow: 0 0 0px 1000px var(--darkblue) inset;
         transition: background-color 5000s ease-in-out 0s;
-   
       }
       .loginHeader {
         .column {

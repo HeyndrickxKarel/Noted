@@ -70,13 +70,13 @@ export default {
     font-weight: bold;
   }
   .notecontent {
-    color: $almostdarkGray;
+    color: var(--almostdarkGray);
     height: 46px;
     overflow-y: hidden;
   }
   .notedate {
     text-align: right;
-    color: $lightGray;
+    color: var(--lightGray);
   }
   .noteDeleteIcon {
     float: right;
@@ -94,7 +94,7 @@ export default {
   border: none;
   background: none;
   font-size: inherit;
-  color: $lightGray;
+  color: var(--lightGray);
   float: right;
   margin: 0 auto;
   height: 40px;

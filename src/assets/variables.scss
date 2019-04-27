@@ -3,11 +3,86 @@ $dangerDark: #8a4e4a;
 $lightGray: rgb(151, 151, 151);
 $lightestGray: rgb(230, 230, 230);
 $darkGray: rgb(97, 97, 97);
-$lessdarkblue: #3f424b;
 $darkblue: #353842;
 $darkbluefade: #3538423d;
-$darkerBlue : #26282e;
 
 $almostdarkGray: rgb(175, 175, 175);
 $backgroundColor: #fafafa;
-$backgroundColorDark: #d6d5d5d9;
+
+#app {
+
+  --danger: #d95a53;
+  --dangerDark: #8a4e4a;
+  --lightGray: rgb(151, 151, 151);
+  --lightestGray: rgb(230, 230, 230);
+  --darkGray:  rgb(97, 97, 97);
+  --darkblue:  #353842;
+  --darkbluefade: #3538423d;
+  --almostdarkGray: rgb(175, 175, 175);
+  --backgroundColor:  #fafafa;
+
+  --navMenu: #353842;
+
+  --mainFontColor: #2c3e50;
+  --mainHeaderColor: #363636;
+  --mainBackgroundColor: #fafafa;
+
+  --notePreviewColor:  rgb(175, 175, 175);
+  --noteIconColor:  rgb(151, 151, 151);
+
+  --borderColor: #d4d4d4;
+
+
+  --toolsButtonColor: rgb(151, 151, 151);
+  --toolsBackgroundColor:  #353842;
+
+  --preBackgroundColor: whitesmoke;
+  --preBorder: none; 
+
+  --pre-codeColor: #4a4a4a;
+
+  --codeColor:indianred;
+  --codeBackgroundColor: whitesmoke;
+
+  --toolsIndicatorBackgroundColor:  #3538423d;
+
+
+}
+#app.darkMode {
+
+    --danger: #d95a53;
+    --dangerDark: #8a4e4a;
+    --lightGray:  rgb(151, 151, 151);
+    --lightestGray: rgb(230, 230, 230);
+    --darkGray:  rgb(97, 97, 97);
+    --darkblue:  #353842;
+    --darkbluefade:  #3538423d;  
+    --almostdarkGray: rgb(175, 175, 175);
+    --backgroundColor: #fafafa;
+
+
+    --navMenu: #353842;
+
+    --mainFontColor: rgb(196, 196, 196);
+    --mainHeaderColor: rgb(255, 255, 255);
+    --mainBackgroundColor: #2b2e36;
+  
+    --notePreviewColor:  rgb(194, 194, 194);
+    --noteIconColor:  rgb(192, 192, 192);
+
+    --borderColor:  #464b58;
+  
+    --toolsButtonColor: rgb(192, 192, 192);
+    --toolsBackgroundColor:  #4c5161;
+
+    --preBackgroundColor: none;
+    --preBorder: 4px solid indianred;; 
+
+    --pre-codeColor: indianred;
+
+    --codeColor:indianred;
+    --codeBackgroundColor: #464b58;
+
+    --toolsIndicatorBackgroundColor:  rgb(214, 214, 214);
+
+}
